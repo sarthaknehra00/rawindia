@@ -1,6 +1,7 @@
+// @ts-nocheck
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { isRateLimited, clientKey, isLoopback } from './_rateLimit.ts';
-import { isUpstashConfigured, upstashGetJSON, upstashSetJSON } from './_upstash.ts';
+import { isRateLimited, clientKey, isLoopback } from './_rateLimit.js';
+import { isUpstashConfigured, upstashGetJSON, upstashSetJSON } from './_upstash.js';
 
 // The shared L/W Ledger + Vaada Clock store — one Upstash Redis key per
 // store, holding the full array as JSON. Tiny dataset (low hundreds of

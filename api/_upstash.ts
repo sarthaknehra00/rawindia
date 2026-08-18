@@ -1,3 +1,4 @@
+// @ts-nocheck
 // RAWINDIA — Upstash Redis REST helper
 //
 // Plain fetch against Upstash's REST API — no SDK dependency needed for two

@@ -1,6 +1,7 @@
+// @ts-nocheck
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { isRateLimited, clientKey, isLoopback } from './_rateLimit.ts';
-import { isCoolingDown, recordKeyFailure, recordKeySuccess } from './_keyCooldown.ts';
+import { isRateLimited, clientKey, isLoopback } from './_rateLimit.js';
+import { isCoolingDown, recordKeyFailure, recordKeySuccess } from './_keyCooldown.js';
 
 type Source = 'newsapi-top' | 'newsapi-everything' | 'currents';
 

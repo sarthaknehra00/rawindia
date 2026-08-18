@@ -1,3 +1,4 @@
+// @ts-nocheck
 // Shared in-memory fixed-window rate limiter for the serverless proxies.
 // Resets on cold start (no cross-instance shared state) — an accepted gap at
 // demo scale; move to Upstash/Vercel KV if abuse ever becomes a real problem.

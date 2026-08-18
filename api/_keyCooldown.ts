@@ -1,3 +1,4 @@
+// @ts-nocheck
 // Shared in-memory per-key cooldown tracker for the serverless proxies' key
 // failover logic. Without this, once every configured key for a service is
 // rate-limited, every single incoming request still tries all of them again

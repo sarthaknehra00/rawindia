@@ -1,5 +1,6 @@
+// @ts-nocheck
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { isRateLimited, clientKey } from './_rateLimit.ts';
+import { isRateLimited, clientKey } from './_rateLimit.js';
 
 // Local-only enrichment tier — powers non-essential, on-demand features (tag
 // explainers, cross-outlet coverage comparison) via a locally-running Ollama

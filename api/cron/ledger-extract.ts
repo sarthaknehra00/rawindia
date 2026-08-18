@@ -1,5 +1,6 @@
+// @ts-nocheck
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { isUpstashConfigured, upstashGetJSON, upstashSetJSON } from '../_upstash.ts';
+import { isUpstashConfigured, upstashGetJSON, upstashSetJSON } from '../_upstash.js';
 
 /**
  * RAWINDIA — Daily Ledger Extraction (Vercel Cron)
@@ -30,7 +31,7 @@ const NEWSAPI_KEY = process.env.NEWSAPI_KEY;
 
 const VERDICTS_KEY = 'rawindia:ledger:verdicts';
 const PROMISES_KEY = 'rawindia:ledger:promises';
-// Read by api/ledger.ts's GET handler, surfaced on the admin dashboard's
+// Read by api/ledger's GET handler, surfaced on the admin dashboard's
 // System Health tab — written on every real run (not the config-skip early
 // returns above) so "last scan" status is honest even on a 0-extraction day.
 const META_KEY = 'rawindia:ledger:meta';

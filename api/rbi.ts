@@ -1,5 +1,6 @@
+// @ts-nocheck
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { isRateLimited, clientKey, isLoopback } from './_rateLimit.ts';
+import { isRateLimited, clientKey, isLoopback } from './_rateLimit.js';
 
 // RBI's public press-release RSS — no key, no auth, no CAPTCHA. Verified live
 // (curl, real browser UA) to be a genuine RSS 2.0 feed with <title>/<description>

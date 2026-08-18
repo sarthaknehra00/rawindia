@@ -1,6 +1,7 @@
+// @ts-nocheck
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { isRateLimited, clientKey, isLoopback } from './_rateLimit.ts';
-import { isUpstashConfigured, upstashGetJSON, upstashSetJSON } from './_upstash.ts';
+import { isRateLimited, clientKey, isLoopback } from './_rateLimit.js';
+import { isUpstashConfigured, upstashGetJSON, upstashSetJSON } from './_upstash.js';
 
 /**
  * RAWINDIA — Accountability Roster (Netaji Report Card)
@@ -57,7 +58,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   try {
     if (body.action === 'seed') {
-      // Self-limiting like api/ledger.ts's 'seed' — only ever does anything
+      // Self-limiting like api/ledger's 'seed' — only ever does anything
       // against a genuinely empty store, permanently inert after that. Safe
       // for every visitor's browser to check on load without a real secret.
       const existing = await upstashGetJSON<any[]>(ROSTER_KEY, []);

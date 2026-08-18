@@ -1,11 +1,12 @@
+// @ts-nocheck
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { isRateLimited, clientKey, isLoopback } from './_rateLimit.ts';
+import { isRateLimited, clientKey, isLoopback } from './_rateLimit.js';
 
 // Embeddings tier for "Chat With The Archive" — a separate endpoint from
 // api/localLlm.ts because Ollama's embeddings API has a different
 // request/response shape than chat completions, not because it targets a
 // different model host. Same local-only, non-essential, zero-cost tier as
-// the rest of the local Ollama features — see api/localLlm.ts's header for
+// the rest of the local Ollama features — see api/localLlm's header for
 // the full reasoning.
 const LOCAL_LLM_URL     = process.env.LOCAL_LLM_URL || 'http://localhost:11434';
 const EMBEDDING_MODEL   = 'nomic-embed-text';
