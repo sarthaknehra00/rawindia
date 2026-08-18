@@ -1,0 +1,12 @@
+{
+  "name": "RAWINDIA — 100% Raw. 100% Real. No Spin.",
+  "short_name": "RAWINDIA",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FCF9F8",
+  "theme_color": "#AB2C5D",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "/icons.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "maskable" }
+  ]
+}

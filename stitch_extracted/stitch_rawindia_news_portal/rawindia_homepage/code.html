@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RAWINDIA - The Raw Truth</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:ital,wght@0,400..700;1,400..700&amp;family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&amp;family=Work+Sans:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-surface": "#1c1b1b",
+                        "on-secondary-fixed-variant": "#8b0e45",
+                        "surface-bright": "#fcf9f8",
+                        "on-secondary-container": "#6e0034",
+                        "on-tertiary-container": "#848484",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-fixed": "#3f001b",
+                        "surface-container-highest": "#e5e2e1",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed-dim": "#c6c6c6",
+                        "outline": "#7e7576",
+                        "primary-fixed": "#e2e2e2",
+                        "inverse-on-surface": "#f3f0ef",
+                        "primary": "#000000",
+                        "on-primary-container": "#848484",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed-dim": "#ffb1c5",
+                        "inverse-surface": "#313030",
+                        "surface": "#fcf9f8",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed-variant": "#474747",
+                        "primary-fixed-dim": "#c6c6c6",
+                        "inverse-primary": "#c6c6c6",
+                        "outline-variant": "#cfc4c5",
+                        "on-surface-variant": "#4c4546",
+                        "surface-container-low": "#f6f3f2",
+                        "tertiary-fixed": "#e2e2e2",
+                        "on-error": "#ffffff",
+                        "on-background": "#1c1b1b",
+                        "surface-tint": "#5e5e5e",
+                        "on-tertiary-fixed-variant": "#474747",
+                        "secondary": "#ab2c5d",
+                        "secondary-container": "#fd6c9c",
+                        "surface-container": "#f0eded",
+                        "tertiary": "#000000",
+                        "error-container": "#ffdad6",
+                        "surface-variant": "#e5e2e1",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed": "#ffd9e1",
+                        "surface-container-high": "#eae7e7",
+                        "on-primary": "#ffffff",
+                        "background": "#fcf9f8",
+                        "on-tertiary-fixed": "#1b1b1b",
+                        "primary-container": "#1b1b1b",
+                        "surface-dim": "#dcd9d9",
+                        "tertiary-container": "#1b1b1b",
+                        "on-primary-fixed": "#1b1b1b"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "gutter": "24px",
+                        "margin-desktop": "40px",
+                        "stack-md": "16px",
+                        "stack-sm": "8px",
+                        "margin-mobile": "16px",
+                        "stack-lg": "32px",
+                        "section-gap": "64px"
+                    },
+                    fontFamily: {
+                        "headline-xl": ["Libre Caslon Text"],
+                        "label-caps": ["Archivo Narrow"],
+                        "body-sm": ["Work Sans"],
+                        "headline-lg": ["Libre Caslon Text"],
+                        "display-lg": ["Libre Caslon Text"],
+                        "meta": ["Work Sans"],
+                        "body-md": ["Work Sans"],
+                        "headline-lg-mobile": ["Libre Caslon Text"]
+                    },
+                    fontSize: {
+                        "headline-xl": ["48px", { lineHeight: "1.2", fontWeight: "700" }],
+                        "label-caps": ["14px", { lineHeight: "1", letterSpacing: "0.1em", fontWeight: "700" }],
+                        "body-sm": ["16px", { lineHeight: "1.5", fontWeight: "400" }],
+                        "headline-lg": ["32px", { lineHeight: "1.3", fontWeight: "600" }],
+                        "display-lg": ["64px", { lineHeight: "1.1", letterSpacing: "-0.02em", fontWeight: "700" }],
+                        "meta": ["13px", { lineHeight: "1", fontWeight: "500" }],
+                        "body-md": ["18px", { lineHeight: "1.6", fontWeight: "400" }],
+                        "headline-lg-mobile": ["28px", { lineHeight: "1.3", fontWeight: "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .ticker-wrap {
+            width: 100%;
+            overflow: hidden;
+            background-color: #ffd9e1;
+            padding: 8px 0;
+            border-bottom: 2px solid #000;
+            border-top: 2px solid #000;
+        }
+        .ticker {
+            display: inline-block;
+            white-space: nowrap;
+            padding-left: 100%;
+            animation: ticker 30s linear infinite;
+        }
+        .ticker-item {
+            display: inline-block;
+            padding: 0 2rem;
+            font-family: 'Archivo Narrow', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+        @keyframes ticker {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-100%, 0, 0); }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-sm min-h-screen flex flex-col">
+<!-- BREAKING NEWS TICKER -->
+<div class="ticker-wrap hidden md:block">
+<div class="ticker">
+<span class="ticker-item text-secondary-fixed-dim"><span class="text-on-secondary-fixed">BREAKING:</span> SENATE PASSES NEW TECH BILL</span>
+<span class="ticker-item text-secondary-fixed-dim"><span class="text-on-secondary-fixed">UPDATE:</span> GLOBAL MARKETS RALLY AFTER JOBS REPORT</span>
+<span class="ticker-item text-secondary-fixed-dim"><span class="text-on-secondary-fixed">FLASH:</span> MAJOR WEATHER EVENT APPROACHING EAST COAST</span>
+<span class="ticker-item text-secondary-fixed-dim"><span class="text-on-secondary-fixed">DEVELOPING:</span> CEO STEPS DOWN AMIDST SCANDAL</span>
+</div>
+</div>
+<!-- TOP NAVBAR -->
+<header class="bg-surface border-b-2 border-primary flex flex-col w-full px-margin-mobile md:px-margin-desktop z-40 sticky top-0">
+<div class="max-w-7xl mx-auto w-full flex items-center justify-between py-stack-md">
+<!-- Left: Logo & Brand -->
+<div class="flex items-center gap-stack-sm">
+<span class="material-symbols-outlined text-4xl text-primary">public</span>
+<div class="flex flex-col">
+<h1 class="font-display-lg text-display-lg font-bold tracking-tighter text-on-surface">RAWINDIA</h1>
+<span class="font-meta text-meta uppercase tracking-widest text-on-surface-variant">The Raw Truth</span>
+</div>
+</div>
+<!-- Center: Navigation (Desktop) -->
+<nav class="hidden md:flex gap-stack-md items-center h-full">
+<a class="text-primary font-bold border-b-4 border-primary pb-2 font-label-caps text-label-caps uppercase hover:bg-secondary hover:text-on-secondary px-2 transition-colors duration-150" href="#">National</a>
+<a class="text-on-surface-variant font-label-caps text-label-caps uppercase hover:bg-secondary hover:text-on-secondary px-2 transition-colors duration-150" href="#">States</a>
+<a class="text-on-surface-variant font-label-caps text-label-caps uppercase hover:bg-secondary hover:text-on-secondary px-2 transition-colors duration-150" href="#">World</a>
+<a class="text-on-surface-variant font-label-caps text-label-caps uppercase hover:bg-secondary hover:text-on-secondary px-2 transition-colors duration-150" href="#">Business</a>
+<a class="text-on-surface-variant font-label-caps text-label-caps uppercase hover:bg-secondary hover:text-on-secondary px-2 transition-colors duration-150" href="#">Tech</a>
+<a class="text-on-surface-variant font-label-caps text-label-caps uppercase hover:bg-secondary hover:text-on-secondary px-2 transition-colors duration-150" href="#">Opinion</a>
+</nav>
+<!-- Right: Actions -->
+<div class="flex items-center gap-stack-md">
+<button class="text-primary hover:text-secondary transition-colors">
+<span class="material-symbols-outlined">search</span>
+</button>
+<button class="bg-primary text-on-primary font-label-caps text-label-caps px-4 py-2 hover:bg-secondary transition-colors uppercase hidden md:block">Subscribe</button>
+<button class="text-primary md:hidden">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</div>
+</header>
+<!-- MAIN CONTENT CANVAS -->
+<main class="flex-grow w-full max-w-[1280px] mx-auto px-margin-mobile md:px-margin-desktop py-section-gap grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- LEFT COLUMN: Secondary Content (3 cols) -->
+<div class="col-span-1 md:col-span-3 flex flex-col gap-stack-lg border-r border-primary pr-gutter hidden md:flex">
+<!-- Claim Tracker -->
+<section>
+<h3 class="font-label-caps text-label-caps uppercase border-b-2 border-primary pb-stack-sm mb-stack-md flex items-center justify-between">
+<span>Claim Tracker</span>
+<span class="material-symbols-outlined text-sm">verified</span>
+</h3>
+<div class="flex flex-col gap-stack-md">
+<!-- Claim 1 -->
+<article class="flex flex-col gap-stack-sm border-b border-primary pb-stack-sm">
+<span class="bg-secondary text-on-secondary font-meta text-meta px-2 py-1 self-start uppercase">False</span>
+<h4 class="font-body-md text-body-md font-bold text-on-surface">Viral video showing mass protests in capital is from 2019.</h4>
+</article>
+<!-- Claim 2 -->
+<article class="flex flex-col gap-stack-sm border-b border-primary pb-stack-sm">
+<span class="bg-primary text-on-primary font-meta text-meta px-2 py-1 self-start uppercase">Verified</span>
+<h4 class="font-body-md text-body-md font-bold text-on-surface">New tax slab officially announced for IT sector professionals.</h4>
+</article>
+<!-- Claim 3 -->
+<article class="flex flex-col gap-stack-sm">
+<span class="bg-surface-variant text-on-surface font-meta text-meta px-2 py-1 border border-primary self-start uppercase">Unverified</span>
+<h4 class="font-body-md text-body-md font-bold text-on-surface">Rumors of imminent merger between major telecom giants.</h4>
+</article>
+</div>
+</section>
+<!-- Pulse Engine Widget -->
+<section class="bg-surface-container-low border border-primary p-stack-md mt-stack-lg">
+<h3 class="font-label-caps text-label-caps uppercase border-b-2 border-primary pb-stack-sm mb-stack-md flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">analytics</span>
+                    Pulse Engine
+                </h3>
+<div class="flex flex-col gap-stack-md">
+<div>
+<div class="flex justify-between font-meta text-meta mb-1">
+<span>#Election2024</span>
+<span class="text-secondary font-bold">Trending Up</span>
+</div>
+<div class="w-full bg-surface-variant h-2">
+<div class="bg-secondary h-2" style="width: 75%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between font-meta text-meta mb-1">
+<span>#MarketCrash</span>
+<span class="text-primary font-bold">Volatile</span>
+</div>
+<div class="w-full bg-surface-variant h-2">
+<div class="bg-primary h-2" style="width: 45%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between font-meta text-meta mb-1">
+<span>#TechLayoffs</span>
+<span class="text-on-surface-variant">Stable</span>
+</div>
+<div class="w-full bg-surface-variant h-2">
+<div class="bg-on-surface-variant h-2" style="width: 30%"></div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- CENTER COLUMN: Main Content (6 cols) -->
+<div class="col-span-1 md:col-span-6 flex flex-col gap-stack-lg">
+<!-- Hero Top Story -->
+<article class="border-2 border-primary p-stack-md flex flex-col gap-stack-md relative">
+<div class="absolute top-0 right-0 bg-secondary text-on-secondary font-label-caps text-label-caps px-3 py-1 uppercase translate-x-2 -translate-y-2 border border-primary">
+                    Top Story
+                </div>
+<img class="w-full h-auto border border-primary object-cover aspect-video" data-alt="A stark, high-contrast black and white photograph of a large crowd of protesters gathered outside a massive concrete government building. The mood is tense and serious, shot from a low angle to emphasize the scale of the architecture and the mass of people. Lighting is dramatic natural daylight with deep shadows. Editorial journalistic style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0B0ktMeCCa3a5o1161l6ffy_fmu1v836pvc68DyjcikWXaP0a0slBg9US_mPoTH_pyCaHnfpKpjL12IGWzVJWJmOc4Yi-WpspEW4UJraYjmD6cqwHx0DGY2YXHqtRjC7WaTEoN6ePa8KGWbpR1txj6zIuUHfIK7eSF5_cNDU7Mt9sNB-7CW1wYk5iExSqaEVCRAElH_zVyQA6o9dZL9N4gTK_pWxl-2aVDnFHj2VImuXjbUCZBbF0"/>
+<div class="flex flex-col gap-stack-sm">
+<div class="flex items-center gap-stack-sm font-meta text-meta uppercase">
+<span class="bg-primary text-on-primary px-2 py-0.5">Ground Report</span>
+<span class="text-on-surface-variant">2 Hours Ago</span>
+</div>
+<h2 class="font-headline-xl text-headline-xl text-on-surface">Thousands March on Capital Amidst Controversial Labor Reforms</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">The city center was brought to a standstill today as an estimated 50,000 workers from various sectors gathered to protest the newly proposed labor laws. Authorities have deployed riot police, but the demonstration remains largely peaceful thus far. Union leaders state they will not disperse until demands are met.</p>
+</div>
+<div class="flex items-center justify-between border-t border-primary pt-stack-sm mt-stack-sm">
+<span class="font-meta text-meta font-bold">By Arun Mehta</span>
+<a class="font-label-caps text-label-caps uppercase flex items-center gap-1 hover:text-secondary transition-colors" href="#">
+                        Read Full Story <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+</article>
+<!-- Secondary Stories Flex Row -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter border-t-2 border-primary pt-stack-lg">
+<article class="flex flex-col gap-stack-sm">
+<img class="w-full h-48 border border-primary object-cover" data-alt="A close-up, high-contrast image of a modern smartphone displaying a volatile stock market graph with sharp red and green lines. The background is a blurred, dark office environment with glowing monitor screens. The lighting is artificial and clinical, highlighting the sharp details of the device screen." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7LtDYt4SKHmoIUQIkRnHiEs9SSRUOw7iqP1HtqqH23uPvMyhhDXfv0EQF0hc63p883QnC0nmofu67UKwPGbe09hkmTAakEd20yiiziZpfbQBI2EWJ3ufv1VITbXXAntFAGeH05vK4mzGe_Xwz9TvdACb-jb7J4PpKnGEx9GBF7OLEQuY3bnZPCgUtAMjqFr5KpECAV65nvH0wQVWqic5WAG1ICWD0hJ84HbUyKw0yDvV8CNAAc3NB"/>
+<div class="flex items-center gap-stack-sm font-meta text-meta uppercase mt-2">
+<span class="border border-primary text-primary px-2 py-0.5">Business</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg md:font-headline-lg-mobile md:text-headline-lg-mobile text-on-surface leading-tight">Tech Stocks Plummet Following Regulatory Scrutiny</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Major tech indices saw a sharp decline in early trading hours as new global data privacy regulations were announced.</p>
+</article>
+<article class="flex flex-col gap-stack-sm">
+<img class="w-full h-48 border border-primary object-cover" data-alt="A stark black and white photo of a politician speaking at a podium, their face partially obscured by microphones. The background is completely dark, isolating the subject in harsh, direct spotlighting. The aesthetic is gritty and authoritative, reminiscent of classic political journalism." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQnE2xcarSZtFjvece5kIejxZVHW1egX-kkVEMUQGeIO1SgmI9jsiZYO-uiZcFgWjkMx7ErhVdtMqvC8_mT7jjxBqMLaNNbK43pDhU42RPRc1ezkhvpq1Tp-h9ceRA_jh4uus9vtEZYeLxZranL4Rk8b1K1Lr7KyaDAsi_ESWh74xShDbPxYVtsK1Gyx_iVhYAVmduawQPj2fwwkGa9rw9b8qlR63kUnL8pKaeUgW8LRU6DPSU6z29"/>
+<div class="flex items-center gap-stack-sm font-meta text-meta uppercase mt-2">
+<span class="border border-primary text-primary px-2 py-0.5">National</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg md:font-headline-lg-mobile md:text-headline-lg-mobile text-on-surface leading-tight">Opposition Demands Immediate Inquiry Into Defense Deal</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Calls for transparency grow louder as leaked documents suggest irregularities in the recent multi-billion dollar procurement.</p>
+</article>
+</div>
+</div>
+<!-- RIGHT COLUMN: Tertiary Content (3 cols) -->
+<div class="col-span-1 md:col-span-3 flex flex-col gap-stack-lg border-l border-primary pl-gutter hidden md:flex">
+<!-- Quick Hits List -->
+<section>
+<h3 class="font-label-caps text-label-caps uppercase border-b-2 border-primary pb-stack-sm mb-stack-md">Latest Briefs</h3>
+<div class="flex flex-col gap-stack-md">
+<article class="border-b border-primary pb-stack-sm">
+<span class="font-meta text-meta text-secondary font-bold uppercase mb-1 block">Science</span>
+<h4 class="font-body-md text-body-md font-bold hover:underline cursor-pointer">New study links microplastics to increased heart disease risk.</h4>
+</article>
+<article class="border-b border-primary pb-stack-sm">
+<span class="font-meta text-meta text-primary font-bold uppercase mb-1 block">Sports</span>
+<h4 class="font-body-md text-body-md font-bold hover:underline cursor-pointer">National team secures crucial victory in final minutes of qualifier.</h4>
+</article>
+<article class="border-b border-primary pb-stack-sm">
+<span class="font-meta text-meta text-primary font-bold uppercase mb-1 block">World</span>
+<h4 class="font-body-md text-body-md font-bold hover:underline cursor-pointer">Diplomatic tensions rise as border negotiations stall again.</h4>
+</article>
+<article>
+<span class="font-meta text-meta text-primary font-bold uppercase mb-1 block">Entertainment</span>
+<h4 class="font-body-md text-body-md font-bold hover:underline cursor-pointer">Award-winning director announces unexpected retirement from filmmaking.</h4>
+</article>
+</div>
+</section>
+<!-- Newsletter Promo Block -->
+<div class="bg-primary text-on-primary p-stack-md flex flex-col gap-stack-sm mt-auto">
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile font-bold">Unfiltered. Direct.</h3>
+<p class="font-body-sm text-body-sm opacity-90">Get the daily briefing delivered straight to your inbox. No spin, just facts.</p>
+<form class="flex flex-col gap-2 mt-2">
+<input class="bg-surface text-on-surface border-0 p-2 font-body-sm text-body-sm focus:ring-2 focus:ring-secondary outline-none" placeholder="Email Address" type="email"/>
+<button class="bg-secondary text-on-secondary font-label-caps text-label-caps py-2 uppercase hover:bg-surface hover:text-primary transition-colors border border-transparent hover:border-primary" type="submit">Subscribe</button>
+</form>
+</div>
+</div>
+</main>
+<!-- FOOTER -->
+<footer class="bg-on-surface text-surface py-section-gap px-margin-mobile md:px-margin-desktop w-full border-t-4 border-secondary mt-auto">
+<div class="max-w-7xl mx-auto flex flex-col gap-stack-lg">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-stack-md border-b border-surface-variant border-opacity-20 pb-stack-md">
+<span class="font-headline-xl text-headline-xl text-surface">RAWINDIA</span>
+<div class="flex gap-stack-md font-label-caps text-label-caps uppercase">
+<a class="hover:text-secondary-fixed transition-colors" href="#">Submit Tip</a>
+<a class="hover:text-secondary-fixed transition-colors" href="#">Editorial Policy</a>
+</div>
+</div>
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-stack-md font-body-sm text-body-sm">
+<div class="flex flex-wrap gap-x-stack-md gap-y-2">
+<a class="text-surface-variant opacity-80 hover:text-secondary-fixed transition-colors" href="#">About Us</a>
+<a class="text-surface-variant opacity-80 hover:text-secondary-fixed transition-colors" href="#">Fact-Check Policy</a>
+<a class="text-surface-variant opacity-80 hover:text-secondary-fixed transition-colors" href="#">Editorial Team</a>
+<a class="text-surface-variant opacity-80 hover:text-secondary-fixed transition-colors" href="#">Contact</a>
+<a class="text-surface-variant opacity-80 hover:text-secondary-fixed transition-colors" href="#">Grievance Redressal</a>
+<a class="text-surface-variant opacity-80 hover:text-secondary-fixed transition-colors" href="#">Careers</a>
+</div>
+<p class="text-surface-variant opacity-60 text-sm">© 2024 RAWINDIA NEWS PORTAL. Compliant with IT Rules 2021. All Rights Reserved.</p>
+</div>
+</div>
+</footer>
+</body></html>

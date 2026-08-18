@@ -1,0 +1,484 @@
+@import "tailwindcss";
+
+/*
+ * "Luminous Heritage" — RAWINDIA's design system, replacing the earlier
+ * "Editorial Brutalism" token set. Same token NAMES (so every existing
+ * Tailwind class like `border-primary` or `text-secondary` keeps working
+ * unchanged across every component) — only the underlying values, and the
+ * shared utility classes below, shift to the warmer, hairline-driven,
+ * whitespace-first palette. Component logic/props/handlers are untouched;
+ * this file plus index.html's font links are the entire redesign surface.
+ */
+@theme {
+  --color-on-surface: #1c1b1b;
+  --color-on-secondary-fixed-variant: #871d2f;
+  --color-surface-bright: #fdf8f8;
+  --color-on-secondary-container: #710921;
+  --color-on-tertiary-container: #848481;
+  --color-on-secondary: #ffffff;
+  --color-on-secondary-fixed: #40000d;
+  --color-surface-container-highest: #e5e2e1;
+  --color-error: #ba1a1a;
+  --color-tertiary-fixed-dim: #c8c6c3;
+  --color-outline: #747878;
+  --color-primary-fixed: #e5e2e1;
+  --color-inverse-on-surface: #f4f0ef;
+  --color-primary: #000000;
+  --color-on-primary-container: #858383;
+  --color-on-error-container: #93000a;
+  --color-secondary-fixed-dim: #ffb2b6;
+  --color-inverse-surface: #313030;
+  --color-surface: #fdf8f8;
+  --color-on-tertiary: #ffffff;
+  --color-on-primary-fixed-variant: #474746;
+  --color-primary-fixed-dim: #c8c6c5;
+  --color-inverse-primary: #c8c6c5;
+  --color-outline-variant: #c4c7c7;
+  --color-on-surface-variant: #444748;
+  --color-surface-container-low: #f7f3f2;
+  --color-tertiary-fixed: #e4e2de;
+  --color-on-error: #ffffff;
+  --color-on-background: #1c1b1b;
+  --color-surface-tint: #5f5e5e;
+  --color-on-tertiary-fixed-variant: #474744;
+  /* Secondary is repointed to Heritage Red — the new system's one accent
+     color, used exclusively for live/breaking indicators, critical accents
+     and poetic highlights (see .pulse-dot below). Every existing
+     text-secondary/bg-secondary/border-secondary usage across the app
+     inherits this automatically. */
+  --color-secondary: #9b2c3c;
+  --color-secondary-container: #fd7682;
+  --color-surface-container: #f1edec;
+  --color-tertiary: #000000;
+  --color-error-container: #ffdad6;
+  --color-surface-variant: #e5e2e1;
+  --color-surface-container-lowest: #ffffff;
+  --color-secondary-fixed: #ffdada;
+  --color-surface-container-high: #ebe7e6;
+  --color-on-primary: #ffffff;
+  --color-background: #fdf8f8;
+  --color-on-tertiary-fixed: #1b1c1a;
+  --color-primary-container: #1c1b1b;
+  --color-surface-dim: #ddd9d8;
+  --color-tertiary-container: #1b1c1a;
+  --color-on-primary-fixed: #1c1b1b;
+
+  /* Brand-specific tokens from the Luminous Heritage system, used directly
+     (bg-wash-warm, text-heritage-red, border-hairline-grey, bg-paper-luminous)
+     where a component wants the literal brand color rather than a semantic
+     Material-style slot. */
+  --color-heritage-red:   #9b2c3c;
+  --color-paper-luminous: #fdfbf7;
+  --color-ink-black:      #1a1a1a;
+  --color-hairline-grey:  #e5e2de;
+  --color-wash-warm:      #f5f3ef;
+
+  /* "Verified" green — used only for source-verification checkmarks/dots
+     (Source Transparency Ledger, live-blog updates). Centralized here so the
+     three call sites that need it (HeroStory's wire-status dot, ArticleView
+     and LiveBlogView's "✓ Verified" labels) share one value instead of each
+     hand-typing a stock Tailwind emerald shade. */
+  --color-verified:      #10b981;
+  --color-verified-text: #047857;
+
+  /* Shared "atmospheric lift" shadow from the Luminous Heritage spec — reused
+     identically by .lift-on-hover, .modal-dialog, and the taxonomy mega-menu
+     dropdown, so it's defined once here instead of three independent
+     hand-typed rgba() values that could silently drift apart. */
+  --shadow-luminous: 0 20px 40px rgba(26, 26, 26, 0.08);
+
+  --font-headline-xl: "Libre Caslon Text", serif;
+  --font-label-caps: "Montserrat", sans-serif;
+  --font-body-sm: "Work Sans", sans-serif;
+  --font-headline-lg: "Libre Caslon Text", serif;
+  --font-display-lg: "Libre Caslon Text", serif;
+  --font-meta: "Work Sans", sans-serif;
+  --font-body-md: "Work Sans", sans-serif;
+  /* Reserved for long-form reading contexts (article body copy) — the
+     "poetic reading experience" register from the Luminous Heritage spec.
+     Everything else (feeds, cards, meta, nav) stays in the clean sans above,
+     where information density matters more than atmosphere. */
+  --font-body-serif: "Libre Caslon Text", serif;
+
+  /* More generous than the old brutalist scale — "museum-gallery pacing."
+     Not pushed all the way to the mockup's essay-only extremes (e.g. its
+     14rem section breaks), which would break RAWINDIA's much denser feed
+     grids; scaled up moderately instead. */
+  --spacing-gutter: 40px;
+  --spacing-margin-desktop: 56px;
+  --spacing-stack-md: 32px;
+  --spacing-stack-sm: 16px;
+  --spacing-margin-mobile: 24px;
+  --spacing-stack-lg: 48px;
+  --spacing-section-gap: 96px;
+  /* Reserved for genuinely major thematic breaks (e.g. between the homepage
+     hero and the next module) — used selectively, not on every section. */
+  --spacing-section-v: 160px;
+}
+
+/* ── Light mode (Luminous Heritage) base tokens ── */
+:root {
+  --color-surface: #fdf8f8;
+  --color-background: #fdf8f8;
+  --color-on-surface: #1c1b1b;
+  --color-on-background: #1c1b1b;
+  --color-primary: #000000;
+  --color-on-primary: #ffffff;
+  --color-primary-container: #1c1b1b;
+  --color-secondary: #9b2c3c;
+  --color-on-secondary: #ffffff;
+  --color-secondary-fixed: #ffdada;
+  --color-secondary-fixed-dim: #ffb2b6;
+  --color-on-secondary-fixed: #40000d;
+  --color-surface-container: #f1edec;
+  --color-surface-container-low: #f7f3f2;
+  --color-surface-container-high: #ebe7e6;
+  --color-surface-container-highest: #e5e2e1;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-variant: #e5e2e1;
+  --color-surface-dim: #ddd9d8;
+  --color-surface-bright: #fdf8f8;
+  --color-surface-tint: #5f5e5e;
+  --color-on-surface-variant: #444748;
+  --color-outline: #747878;
+  --color-outline-variant: #c4c7c7;
+  --color-inverse-surface: #313030;
+  --color-inverse-on-surface: #f4f0ef;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-surface);
+  color: var(--color-on-surface);
+  font-family: 'Work Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: -0.01em;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  /* Barely-there paper grain — straight from the Luminous Heritage spec's
+     "atmospheric warmth" principle. At 3% opacity it reads as texture, not
+     noise; the difference between "flat CSS background" and "printed on
+     something" is most of what "premium" actually means here. */
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+}
+
+/* Custom text selection — a tinted highlight instead of the browser default
+   reads as a deliberate, designed surface rather than an unstyled one. */
+::selection {
+  background-color: var(--color-heritage-red);
+  color: #ffffff;
+}
+
+/* Refined focus ring — the default browser blue clashes hard with a warm
+   ink/crimson palette. Keeping it visible (accessibility) but on-brand. */
+:focus-visible {
+  outline: 2px solid var(--color-heritage-red);
+  outline-offset: 2px;
+}
+
+/* Refined Typography Classes */
+.font-display-lg { font-family: 'Libre Caslon Text', Georgia, serif; letter-spacing: -0.03em; }
+.font-headline-xl { font-family: 'Libre Caslon Text', Georgia, serif; letter-spacing: -0.025em; }
+.font-headline-lg { font-family: 'Libre Caslon Text', Georgia, serif; letter-spacing: -0.02em; }
+.font-label-caps { font-family: 'Montserrat', sans-serif; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600; }
+.font-meta { font-family: 'Work Sans', sans-serif; font-size: 13px; font-weight: 400; }
+.font-body-sm { font-family: 'Work Sans', sans-serif; font-size: 14px; line-height: 1.6; }
+.font-body-md { font-family: 'Work Sans', sans-serif; font-size: 16px; line-height: 1.65; }
+/* Long-form reading register — article body copy only. Generous line-height
+   (vs the 1.6-1.65 of the dense-UI sans above) for the "poetic reading
+   experience" the Luminous Heritage spec calls for. */
+.font-body-serif { font-family: 'Libre Caslon Text', Georgia, serif; }
+
+/* ── Luminous Heritage accents ──────────────────────────────────────────────
+   Direct ports from the Stitch design system — used where a component wants
+   the literal brand vocabulary (a live/breaking dot, a whisper-thin rule)
+   rather than a semantic color slot. */
+.pulse-dot {
+  width: 6px;
+  height: 6px;
+  background-color: var(--color-heritage-red);
+  border-radius: 50%;
+  display: inline-block;
+}
+.hairline-b { border-bottom: 0.5px solid var(--color-hairline-grey); }
+.hairline-t { border-top: 0.5px solid var(--color-hairline-grey); }
+.underline-link {
+  text-decoration: underline;
+  text-decoration-thickness: 0.5px;
+  text-underline-offset: 6px;
+  text-decoration-color: var(--color-hairline-grey);
+  transition: text-decoration-color 0.2s ease;
+}
+.underline-link:hover { text-decoration-color: var(--color-heritage-red); }
+
+/* Luminous Overlay lift — a soft, large-radius shadow on hover for clickable
+   cards, per the spec's "atmospheric lift rather than a physical one." Used
+   sparingly (hero-level cards only), not on every list item — a lift on
+   everything reads as noisy, not premium. */
+.lift-on-hover {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.lift-on-hover:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-luminous);
+}
+.shadow-luminous {
+  box-shadow: var(--shadow-luminous);
+}
+
+/* Breaking News Ticker */
+.ticker-wrap {
+  width: 100%;
+  overflow: hidden;
+  background-color: var(--color-wash-warm);
+  padding: 8px 0;
+  border-bottom: 0.5px solid var(--color-hairline-grey);
+  border-top: 0.5px solid var(--color-hairline-grey);
+  display: block;
+}
+
+.ticker {
+  display: inline-block;
+  white-space: nowrap;
+  padding-left: 100%;
+  animation: ticker-anim 110s linear infinite;
+}
+
+/* :focus-within (not just :hover) so keyboard users tabbing through ticker
+   items also get a stationary target instead of it sliding out from under
+   them mid-tab — see BreakingTicker.tsx's tabIndex/role="button" items. */
+.ticker:hover, .ticker:focus-within {
+  animation-play-state: paused;
+}
+
+.ticker-item {
+  display: inline-block;
+  padding: 0 2rem;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+@keyframes ticker-anim {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-100%, 0, 0); }
+}
+
+/* Bar chart grow animation */
+@keyframes growWidth {
+  from { width: 0; }
+}
+.animate-bar {
+  animation: growWidth 1s ease-out forwards;
+}
+
+/* Structural dividers — hairline-driven, not brutalist-heavy. Three weights
+   kept (thin/medium/strong) so genuinely major boundaries (a masthead, a
+   footer) still read as more significant than a minor list divider, but all
+   three are far lighter than the old 1-3px solid-black scale. */
+.news-border { border: 0.5px solid var(--color-hairline-grey); }
+.news-border-b { border-bottom: 0.5px solid var(--color-hairline-grey); }
+.news-border-t { border-top: 0.5px solid var(--color-hairline-grey); }
+.news-border-r { border-right: 0.5px solid var(--color-hairline-grey); }
+.news-border-l { border-left: 0.5px solid var(--color-hairline-grey); }
+
+.rule-solid { border-bottom: 0.5px solid var(--color-hairline-grey); }
+.rule-thick { border-bottom: 1px solid var(--color-ink-black); }
+.rule-heavy { border-bottom: 2px solid var(--color-ink-black); }
+
+/* Content type tag colors */
+.tag-news { background: transparent; border: 0.5px solid var(--color-ink-black); color: var(--color-ink-black); }
+.tag-ground-report { background: var(--color-ink-black); color: #ffffff; }
+.tag-analysis { background: transparent; border: 0.5px solid var(--color-ink-black); color: var(--color-ink-black); }
+.tag-opinion { background: var(--color-heritage-red); color: #ffffff; }
+.tag-pulse { background: var(--color-ink-black); color: #ffffff; }
+
+/* ── Editorial image aesthetic ──────────────────────────────────────────────
+   Washed-down, low-saturation newsprint feel.
+   Hover reveals full colour — a deliberate micro-interaction.
+   Matching the editorial brutalism design system of RAWINDIA.            */
+
+.editorial-img {
+  filter: grayscale(22%) saturate(0.58) contrast(1.08) brightness(0.92) sepia(0.06);
+  transition: filter 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.editorial-img:hover {
+  filter: grayscale(0%) saturate(1) contrast(1.02) brightness(1) sepia(0);
+}
+
+/* Ground Report / Critical Breaking: full photojournalism black & white */
+.editorial-img-hard {
+  filter: grayscale(72%) contrast(1.18) brightness(0.86) sepia(0.08);
+  transition: filter 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.editorial-img-hard:hover {
+  filter: grayscale(15%) contrast(1.06) brightness(0.97) sepia(0);
+}
+
+/* ── Image wrapper with gradient overlay ────────────────────────────────────
+   Adds a bottom-fade gradient for text readability on card images.        */
+.img-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+.img-wrapper::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 40%,
+    rgba(0, 0, 0, 0.12) 70%,
+    rgba(0, 0, 0, 0.28) 100%
+  );
+  pointer-events: none;
+}
+/* Hero/featured image — stronger gradient */
+.img-wrapper-hero::after {
+  background: linear-gradient(
+    to bottom,
+    transparent 35%,
+    rgba(0, 0, 0, 0.18) 65%,
+    rgba(0, 0, 0, 0.45) 100%
+  );
+}
+/* Archived / no-image placeholder */
+.img-placeholder {
+  background: repeating-linear-gradient(
+    45deg,
+    var(--color-surface-container-low),
+    var(--color-surface-container-low) 10px,
+    var(--color-surface-container) 10px,
+    var(--color-surface-container) 20px
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Smooth filter transitions on all filter controls ── */
+.filter-transition {
+  transition: all 0.2s ease;
+}
+
+/* Minimalist Drop Cap */
+.drop-cap::first-letter {
+  font-family: 'Libre Caslon Text', Georgia, serif;
+  float: left;
+  font-size: 3.8rem;
+  line-height: 0.82;
+  padding-top: 2px;
+  padding-right: 8px;
+  font-weight: 700;
+  color: #000000;
+}
+
+/* Custom Scrollbar */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(3px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in {
+  animation: fadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Article synthesized — smooth in-place update flash */
+@keyframes synthesisFlash {
+  0%   { background-color: transparent; }
+  30%  { background-color: rgba(155, 44, 60, 0.06); }  /* heritage-red tint */
+  100% { background-color: transparent; }
+}
+.synthesis-flash {
+  animation: synthesisFlash 1.2s ease-out forwards;
+}
+
+/* Skeleton loading pulse for un-synthesized raw articles */
+.raw-article {
+  position: relative;
+}
+.raw-article::before {
+  content: '⚡';
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-size: 10px;
+  opacity: 0.4;
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 0.3; }
+  50%       { opacity: 0.7; }
+}
+
+/* Pulse Bar Graphic */
+.pulse-gauge-bar {
+  display: flex;
+  width: 100%;
+  height: 4px;
+  background: #eae7e7;
+  overflow: hidden;
+}
+
+/* Modal Backdrop */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(2px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.modal-dialog {
+  background: var(--color-paper-luminous);
+  border: 0.5px solid var(--color-hairline-grey);
+  box-shadow: var(--shadow-luminous);
+  width: 100%;
+  max-width: 680px;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 2.25rem;
+  position: relative;
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  background: transparent;
+  color: var(--color-ink-black);
+  border: 0.5px solid var(--color-ink-black);
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  transition: all 0.15s ease;
+}
+
+.modal-close-btn:hover {
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+}

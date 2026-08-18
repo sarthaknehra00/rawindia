@@ -1,0 +1,674 @@
+<title>Operation Vaada</title>
+<style>
+  :root {
+    --bg: #ede7d8;
+    --surface: #f7f3e8;
+    --surface-2: #e3dbc7;
+    --ink: #221c14;
+    --ink-soft: #55493a;
+    --ink-faint: #8a7c65;
+    --rule: #c9bea0;
+    --accent: #1f3a52;
+    --accent-soft: #3f5c74;
+    --w-color: #2f5d3a;
+    --w-bg: #dce6d5;
+    --l-color: #8c2f1b;
+    --l-bg: #ecdad2;
+    --ext-color: #8a5a10;
+    --ext-bg: #ecdfc2;
+    --font-display: Georgia, 'Iowan Old Style', 'Palatino Linotype', 'Times New Roman', serif;
+    --font-body: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    --font-mono: ui-monospace, 'SF Mono', 'Cascadia Mono', 'Courier New', monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #16140f;
+      --surface: #201c15;
+      --surface-2: #2a251c;
+      --ink: #ede4cf;
+      --ink-soft: #b5a88e;
+      --ink-faint: #7c715c;
+      --rule: #3a3226;
+      --accent: #8fb6d6;
+      --accent-soft: #6f93ad;
+      --w-color: #7fcf8a;
+      --w-bg: #22321f;
+      --l-color: #e88361;
+      --l-bg: #3a2219;
+      --ext-color: #e3b955;
+      --ext-bg: #3a2e14;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #16140f;
+    --surface: #201c15;
+    --surface-2: #2a251c;
+    --ink: #ede4cf;
+    --ink-soft: #b5a88e;
+    --ink-faint: #7c715c;
+    --rule: #3a3226;
+    --accent: #8fb6d6;
+    --accent-soft: #6f93ad;
+    --w-color: #7fcf8a;
+    --w-bg: #22321f;
+    --l-color: #e88361;
+    --l-bg: #3a2219;
+    --ext-color: #e3b955;
+    --ext-bg: #3a2e14;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.65;
+    margin: 0;
+    padding: 0 20px 120px;
+  }
+
+  ::selection { background: var(--accent); color: var(--surface); }
+
+  .doc {
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  /* ── Cover ─────────────────────────────────────────────────────────── */
+  .cover {
+    padding: 72px 0 48px;
+    border-bottom: 3px double var(--rule);
+    margin-bottom: 56px;
+  }
+  .cover-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 28px;
+  }
+  .cover h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.6rem, 6vw, 4.2rem);
+    font-weight: 700;
+    margin: 0 0 12px;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+  .cover .sub {
+    font-size: 1.15rem;
+    color: var(--ink-soft);
+    max-width: 46ch;
+    margin: 0 0 32px;
+  }
+  .stamp-row { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+  .stamp {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border: 2px solid currentColor;
+    border-radius: 3px;
+    padding: 5px 12px;
+    transform: rotate(-2deg);
+    display: inline-block;
+  }
+  .stamp.draft { color: var(--l-color); }
+  .stamp.zero-budget { color: var(--accent); transform: rotate(1.5deg); }
+  .meta-line { font-family: var(--font-mono); font-size: 13px; color: var(--ink-faint); margin-top: 20px; }
+
+  /* ── TOC ───────────────────────────────────────────────────────────── */
+  .toc {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 24px 28px;
+    margin-bottom: 64px;
+  }
+  .toc h2 {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin: 0 0 14px;
+  }
+  .toc ol { columns: 2; column-gap: 32px; margin: 0; padding-left: 0; list-style: none; }
+  .toc li { break-inside: avoid; margin-bottom: 8px; font-size: 14px; }
+  .toc a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--rule); }
+  .toc a:hover { color: var(--accent); border-color: var(--accent); }
+  .toc .n { font-family: var(--font-mono); color: var(--ink-faint); margin-right: 6px; }
+
+  /* ── Section tabs ──────────────────────────────────────────────────── */
+  section { margin-bottom: 64px; scroll-margin-top: 24px; }
+  .part-divider {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--surface);
+    background: var(--ink);
+    display: inline-block;
+    padding: 6px 14px;
+    margin: 0 0 40px;
+  }
+  h2.sec {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin: 0 0 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--rule);
+  }
+  h2.sec .num { font-size: 22px; color: var(--ink-faint); font-family: var(--font-display); font-style: italic; }
+  h3 {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    margin: 32px 0 10px;
+    text-wrap: balance;
+  }
+  p { margin: 0 0 14px; max-width: 68ch; }
+  .lede { font-size: 1.1rem; color: var(--ink-soft); max-width: 62ch; }
+  ul, ol.plain { margin: 0 0 16px; padding-left: 22px; max-width: 66ch; }
+  li { margin-bottom: 6px; }
+  strong { color: var(--ink); }
+  a { color: var(--accent); }
+
+  /* ── Callout / case-file card ──────────────────────────────────────── */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-left: 4px solid var(--accent);
+    border-radius: 2px;
+    padding: 20px 24px;
+    margin: 20px 0 28px;
+    position: relative;
+  }
+  .card.w { border-left-color: var(--w-color); }
+  .card.l { border-left-color: var(--l-color); }
+  .card .tag {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  /* ── verdict badges ────────────────────────────────────────────────── */
+  .badge {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 3px;
+    display: inline-block;
+  }
+  .badge.w { background: var(--w-bg); color: var(--w-color); }
+  .badge.l { background: var(--l-bg); color: var(--l-color); }
+  .badge.ext { background: var(--ext-bg); color: var(--ext-color); }
+
+  /* ── Mock UI: L/W ledger card ──────────────────────────────────────── */
+  .mock-ledger { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 20px 0 28px; }
+  @media (max-width: 560px) { .mock-ledger { grid-template-columns: 1fr; } }
+  .mock-card {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 16px 18px;
+  }
+  .mock-card .headline { font-family: var(--font-display); font-size: 1.05rem; margin: 6px 0 8px; text-wrap: balance; }
+  .mock-card .src { font-family: var(--font-mono); font-size: 11px; color: var(--ink-faint); }
+
+  /* ── Vaada clock mock ──────────────────────────────────────────────── */
+  .clock-mock {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 20px 24px;
+    margin: 20px 0 28px;
+  }
+  .clock-mock .promise-text { font-family: var(--font-display); font-size: 1.15rem; margin-bottom: 12px; text-wrap: balance; }
+  .clock-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; font-family: var(--font-mono); font-size: 13px; }
+  .clock-row .arrow { color: var(--ink-faint); }
+  .clock-row .dead { color: var(--ink-faint); text-decoration: line-through; }
+  .clock-row .cur { color: var(--ext-color); font-weight: 700; }
+  .odometer {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--l-color);
+    margin: 10px 0 4px;
+  }
+  .odometer .unit { font-size: 0.9rem; color: var(--ink-faint); font-weight: 400; margin-left: 6px; }
+
+  /* ── Tables ────────────────────────────────────────────────────────── */
+  .table-wrap { overflow-x: auto; margin: 20px 0 28px; border: 1px solid var(--rule); border-radius: 4px; }
+  table { border-collapse: collapse; width: 100%; min-width: 560px; font-size: 14px; }
+  thead th {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    text-align: left;
+    background: var(--surface-2);
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--rule);
+  }
+  td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--rule);
+    background: var(--surface);
+    vertical-align: top;
+  }
+  tr:last-child td { border-bottom: none; }
+  td.mono, th.mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: 13px; }
+  td.verdict-kill { color: var(--l-color); font-weight: 700; }
+  td.verdict-keep { color: var(--w-color); font-weight: 700; }
+  td.verdict-evolve { color: var(--ext-color); font-weight: 700; }
+  td.verdict-new { color: var(--accent); font-weight: 700; }
+
+  /* ── code block ────────────────────────────────────────────────────── */
+  .code-wrap { overflow-x: auto; margin: 16px 0 28px; }
+  pre.code {
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    line-height: 1.6;
+    background: var(--ink);
+    color: var(--bg);
+    padding: 18px 20px;
+    border-radius: 6px;
+    margin: 0;
+    white-space: pre;
+  }
+  pre.mermaid {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 12px;
+    margin: 20px 0 28px;
+  }
+
+  .callout-risk {
+    border: 1px dashed var(--l-color);
+    background: var(--l-bg);
+    color: var(--l-color);
+    border-radius: 4px;
+    padding: 14px 18px;
+    font-size: 14px;
+    margin: 20px 0 28px;
+  }
+  .callout-risk strong { color: var(--l-color); }
+
+  footer.doc-end {
+    border-top: 3px double var(--rule);
+    margin-top: 40px;
+    padding-top: 24px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-faint);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+</style>
+
+<div class="doc">
+
+  <div class="cover">
+    <div class="cover-eyebrow">
+      <span>RAWINDIA — Internal Product Dossier</span>
+      <span>File No. OV-01</span>
+    </div>
+    <h1>Operation Vaada</h1>
+    <p class="sub">A ground-up product and technical redesign: killing the chatbot gimmicks, rebuilding RAWINDIA around one sharp idea — a public ledger of who kept their word and who didn't.</p>
+    <div class="stamp-row">
+      <span class="stamp draft">Draft — For Review</span>
+      <span class="stamp zero-budget">Zero-Budget Architecture</span>
+    </div>
+    <div class="meta-line">PRD + TRD · v1.0 · 18 August 2026 · Owner: Vaibhav Shukla</div>
+  </div>
+
+  <div class="toc">
+    <h2>Contents</h2>
+    <ol>
+      <li><span class="n">0</span><a href="#why">Why This Document Exists</a></li>
+      <li><span class="n">1</span><a href="#vision">Product Vision &amp; Positioning</a></li>
+      <li><span class="n">2</span><a href="#persona">The Ledger Reader</a></li>
+      <li><span class="n">3</span><a href="#triage">Kill / Keep / Evolve</a></li>
+      <li><span class="n">4.1</span><a href="#lw">The L/W Ledger</a></li>
+      <li><span class="n">4.2</span><a href="#vaada">The Vaada Clock</a></li>
+      <li><span class="n">4.3</span><a href="#netaji">Netaji Report Card v2</a></li>
+      <li><span class="n">4.4</span><a href="#cards">Verdict Card Engine</a></li>
+      <li><span class="n">5</span><a href="#guardrails">Editorial Guardrails</a></li>
+      <li><span class="n">6</span><a href="#metrics">Success Metrics &amp; Non-Goals</a></li>
+      <li><span class="n">7</span><a href="#constraints">TRD — Constraints</a></li>
+      <li><span class="n">8</span><a href="#datamodel">Data Model</a></li>
+      <li><span class="n">9</span><a href="#pipeline">Extraction Pipeline</a></li>
+      <li><span class="n">10</span><a href="#review">Review Queue</a></li>
+      <li><span class="n">11</span><a href="#flow">End-to-End Flow</a></li>
+      <li><span class="n">12</span><a href="#engine">Card Engine Spec</a></li>
+      <li><span class="n">13</span><a href="#delete">What Gets Deleted</a></li>
+      <li><span class="n">14</span><a href="#rollout">Phased Rollout</a></li>
+      <li><span class="n">15</span><a href="#risks">Risks &amp; Open Questions</a></li>
+    </ol>
+  </div>
+
+  <span class="part-divider">Part One — Product</span>
+
+  <section id="why">
+    <h2 class="sec"><span class="num">0</span>Why This Document Exists</h2>
+    <p class="lede">RAWINDIA has been built one feature at a time — a spin decoder here, a sparring partner there, a chatbot bolted onto the archive — and it shows. The site currently reads as a pile of demos, not a product with a point of view.</p>
+    <p>Three specific complaints drove this redesign, and they're worth stating plainly rather than smoothing over:</p>
+    <ul>
+      <li><strong>It's jittery.</strong> Features were added independently, each with its own modal, its own visual language, its own reason for existing. Nothing ties them together.</li>
+      <li><strong>Some of it is gimmick.</strong> Argument Sparring Partner and Chat With The Archive are both chat interfaces bolted onto a news site. Anyone who genuinely wants to interrogate an argument or ask an open-ended question already has ChatGPT or Claude open in another tab — full-strength, no local-model quality ceiling, no waiting on CPU inference. A worse copy of that experience, running on a news site, gets used once out of curiosity and never again. That's the definition of a gimmick.</li>
+      <li><strong>Some of it is generic.</strong> A live wire, a search bar, a taxonomy explorer — competent, but indistinguishable from any other India news aggregator. Nothing here is a reason to come back.</li>
+    </ul>
+    <p>The fix isn't a seventh feature bolted onto the pile. It's picking <em>one</em> idea sharp enough to be worth building a whole product around, and cutting everything that doesn't serve it.</p>
+    <div class="card l">
+      <span class="tag">The one idea</span>
+      RAWINDIA is not a newsroom. It's a <strong>ledger</strong> — a running, public, receipts-first record of what India's institutions and politicians said they'd do, and whether they actually did it. Every other feature either feeds that ledger or gets cut.
+    </div>
+  </section>
+
+  <section id="vision">
+    <h2 class="sec"><span class="num">1</span>Product Vision &amp; Positioning</h2>
+    <p><strong>Positioning statement:</strong> RAWINDIA is the place that keeps score — a public W/L record for every promise, deadline, and spin attempt an Indian politician or institution puts on the record, built to be screenshotted and forwarded, not read end-to-end.</p>
+    <p>This is a real, validated genre, not an invented one. India already has <a href="https://manifestowatch.in/">ManifestoWatch</a>, <a href="https://sarkarivaade.com/">Sarkari Vaade</a> and <a href="https://jumlameter.org/">Jumlameter</a> tracking manifesto promises against gazette/budget records, and PolitiFact's Truth-O-Meter has run the same playbook on U.S. presidents for over a decade with a five-way verdict scale (Kept / Broken / Compromise / Stalled / In the Works) built entirely on verifiable outcomes, never on stated intent. Separately, Gen Z's actual political information diet is already meme-native — researchers tracking 2026's youth protest movements describe memes as a primary vehicle for political criticism and accountability, not a joke layered on top of it.</p>
+    <p>RAWINDIA's opening isn't inventing the promise-tracker — it's translating one into the visual and sharing language a scroll-first, WhatsApp-forwarding, Instagram-story audience already speaks: a stamped verdict, a running clock, a report card — not a table in a PDF.</p>
+    <h3>What RAWINDIA explicitly is not</h3>
+    <ul>
+      <li><strong>Not a chatbot.</strong> No feature should require a reader to type an open-ended question and wait for a generated answer. If the answer needs to come from typing a question, the feature has already lost to ChatGPT.</li>
+      <li><strong>Not neutral wire-service voice.</strong> The ledger has a stance: results over intentions, receipts over rhetoric.</li>
+      <li><strong>Not a legal fact-checker.</strong> RAWINDIA doesn't claim adjudicating authority — it claims to link its sources and let the reader judge. See §5.</li>
+    </ul>
+  </section>
+
+  <section id="persona">
+    <h2 class="sec"><span class="num">2</span>The Ledger Reader</h2>
+    <div class="card">
+      <span class="tag">Primary persona</span>
+      <strong>19–29, urban or semi-urban India.</strong> Politically aware, but exhausted by both mainstream-media spin and preachy fact-check essays. Consumes news in a scroll, not a sit-down read. Trusts a sharp, sourced, peer-shared take over a 1,200-word explainer. Shares things via WhatsApp status and Instagram stories, not by emailing a link. Wants the receipts, not the op-ed.
+    </div>
+    <p>This reader doesn't need RAWINDIA to explain <em>why</em> a promise was broken in six paragraphs. They need to see the stamp, the source, and the clock — and a card worth forwarding to the group chat.</p>
+  </section>
+
+  <section id="triage">
+    <h2 class="sec"><span class="num">3</span>Kill / Keep / Evolve</h2>
+    <p>Every existing feature, judged against the one idea in §0:</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Feature</th><th>Verdict</th><th>Why</th></tr></thead>
+        <tbody>
+          <tr><td>Argument Sparring Partner</td><td class="verdict-kill">Kill</td><td>Chatbot UX on a news site — the exact gimmick this redesign exists to remove.</td></tr>
+          <tr><td>Chat With The Archive</td><td class="verdict-kill">Kill</td><td>Same failure mode, dressed as RAG. The <em>embedding infrastructure</em> underneath survives — see §13 — the chat UI on top of it doesn't.</td></tr>
+          <tr><td>Spin Decoder</td><td class="verdict-keep">Keep</td><td>Inline, ambient, not a chat window. Already generates the "spin frequency" signal the Netaji Report Card needs.</td></tr>
+          <tr><td>Shareable Quote Cards</td><td class="verdict-evolve">Evolve</td><td>Right instinct (screenshot-native), wrong scope. Generalizes into the Verdict Card Engine — one card generator for quotes, promises, and report cards alike.</td></tr>
+          <tr><td>Roast the Spin Leaderboard + Institutional Report Card</td><td class="verdict-evolve">Evolve</td><td>Merge into Netaji Report Card v2 — same underlying ledger data, one page per politician instead of two disconnected ones.</td></tr>
+          <tr><td>RBI press-release ingestion</td><td class="verdict-keep">Keep, unchanged</td><td>Real primary-source pipeline with genuine PDF citations. Becomes one of several feeds into the promise-extraction pipeline (§9).</td></tr>
+          <tr><td>L/W Ledger</td><td class="verdict-new">New — flagship</td><td>The one-line take feed. See §4.1.</td></tr>
+          <tr><td>Vaada Clock</td><td class="verdict-new">New — flagship</td><td>The literal "date extensions" feature. See §4.2.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="lw">
+    <h2 class="sec"><span class="num">4.1</span>The L/W Ledger</h2>
+    <p class="lede">A running feed where every major policy move, court verdict, or political event gets exactly one verdict: a W for whoever it favored, an L for whoever it cost. Blunt on purpose — the ledger doesn't have room for "it's complicated."</p>
+    <div class="mock-ledger">
+      <div class="mock-card">
+        <span class="badge l">L — Fiscal Hawks</span>
+        <div class="headline">Union Budget hikes subsidy outlay 18%, deficit target slips to 5.1%</div>
+        <div class="src">Source: PIB Budget Statement, 1 Feb 2026</div>
+      </div>
+      <div class="mock-card">
+        <span class="badge w">W — Commuters</span>
+        <div class="headline">Delhi–Meerut RRTS full corridor opens, cuts travel time to 55 min</div>
+        <div class="src">Source: NCRTC press release, 12 Aug 2026</div>
+      </div>
+    </div>
+    <p><strong>Editorial rule:</strong> a verdict is assigned to the <em>outcome</em>, never the person — "L for commuters" is fair game, "L for [name], who is clearly incompetent" is not. See §5.</p>
+    <p><strong>Why this beats a chatbot:</strong> zero typing, zero waiting on a model. A reader gets the take in the time it takes to glance at a card — and every card is built to be forwarded as-is.</p>
+  </section>
+
+  <section id="vaada">
+    <h2 class="sec"><span class="num">4.2</span>The Vaada Clock</h2>
+    <p class="lede">This is the literal feature that was asked for: every tracked promise gets a running clock, and every deadline that gets pushed stays on the record instead of quietly disappearing.</p>
+    <div class="clock-mock">
+      <div class="promise-text">"Every household in the state will have a piped water connection by March 2023."</div>
+      <div class="clock-row">
+        <span class="dead">Mar 2023</span><span class="arrow">→</span><span class="dead">Dec 2024</span><span class="arrow">→</span><span class="cur">Jun 2027</span>
+        <span class="badge ext">Extended ×2</span>
+      </div>
+      <div class="odometer">1,247<span class="unit">days overdue on the original deadline</span></div>
+    </div>
+    <p>The status taxonomy is deliberately not invented from scratch — it adapts the five-way scale PolitiFact has run for over a decade, because "requires a verifiable outcome, not stated intent" is the one rule every real promise-tracker in the research converged on independently:</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Status</th><th>Meaning</th></tr></thead>
+        <tbody>
+          <tr><td><span class="badge w">Kept</span></td><td>Verifiable outcome delivered, matching the original commitment.</td></tr>
+          <tr><td><span class="badge l">Broken</span></td><td>Abandoned, contradicted, or missed with no path forward.</td></tr>
+          <tr><td><span class="badge ext">Extended</span></td><td>Deadline pushed at least once. Full push history stays visible — this is the clock.</td></tr>
+          <tr><td><span class="badge ext">Stalled</span></td><td>No measurable movement; no new deadline set either.</td></tr>
+          <tr><td>In Progress</td><td>Active, on-schedule movement toward the original or current deadline.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><strong>Non-negotiable rule, carried over from every precedent studied (ManifestoWatch, Sarkari Vaade, Jumlameter, PolitiFact):</strong> no card renders without at least one linked source per status change. An unsourced verdict is worse than no verdict — see §5 and §10.</p>
+  </section>
+
+  <section id="netaji">
+    <h2 class="sec"><span class="num">4.3</span>Netaji Report Card v2</h2>
+    <p>One page per tracked politician or institution, replacing the current split between the Spin Leaderboard and the Institutional Report Card with a single scorecard:</p>
+    <ul>
+      <li><strong>W/L tally</strong> — rolled up from every L/W Ledger entry naming them.</li>
+      <li><strong>Vaada record</strong> — kept / broken / extended / stalled counts, pulled straight from §4.2's data.</li>
+      <li><strong>Spin frequency</strong> — reused as-is from the existing Spin Decoder ledger (no rework needed, it already logs exactly this).</li>
+      <li><strong>Hard facts (Phase 2, not promised for launch)</strong> — assets and pending criminal cases, sourced from ADR's public candidate-affidavit data (myneta.info) if a genuinely free access path is confirmed. Flagged explicitly as unconfirmed rather than assumed — see §15.</li>
+    </ul>
+    <p>Exportable as a single shareable "report card" image via the same engine described next.</p>
+  </section>
+
+  <section id="cards">
+    <h2 class="sec"><span class="num">4.4</span>Verdict Card Engine</h2>
+    <p>Infrastructure, not a reader-facing feature by itself — but the direct fix for the "jittery architecture" complaint. Today, Quote Cards are a single-purpose canvas generator wired to one modal. It becomes one shared engine, parameterized by verdict type, used everywhere a screenshot-worthy card is needed:</p>
+    <div class="code-wrap"><pre class="code">renderVerdictCard({
+  type: 'quote' | 'lw-verdict' | 'promise-status' | 'report-card',
+  // shared brand chrome (masthead, colors, watermark) — always applied
+  ...typeSpecificFields
+})</pre></div>
+    <p>One component, one visual identity, reused four ways — instead of four modals each reinventing card layout, brand colors, and export logic independently.</p>
+  </section>
+
+  <section id="guardrails">
+    <h2 class="sec"><span class="num">5</span>Editorial Guardrails</h2>
+    <p>Naming real, named, living politicians in a "broken promise" ledger is the single highest-risk surface in this entire redesign — get it wrong and the failure mode isn't a bad UX review, it's a defamation claim. Three rules are non-negotiable, not aspirational:</p>
+    <ol class="plain">
+      <li><strong>No verdict without a source link.</strong> Every status, every W/L, every "extended" — one click away from the actual evidence. This isn't a nice-to-have; it's what separates a ledger from a rumor mill, and it's the one rule every real-world precedent (§1) shares without exception.</li>
+      <li><strong>Two-tier trust badge, always visible.</strong> Anything an LLM proposed and a human hasn't reviewed yet is marked <span class="badge ext">AI-Flagged · Unverified</span>. Nothing upgrades to <span class="badge w">RAWINDIA Verified</span> without passing through the review queue in §10. These badges render on the card itself, not just in an admin view — readers should never be able to mistake one for the other.</li>
+      <li><strong>Mock the action, never the person.</strong> "L for the water ministry" is a fair, sourced take on an outcome. Commentary on a politician's appearance, family, or character has no place on the ledger — it's not the point, and it's the fastest way to turn a credible accountability project into a target.</li>
+    </ol>
+  </section>
+
+  <section id="metrics">
+    <h2 class="sec"><span class="num">6</span>Success Metrics &amp; Non-Goals</h2>
+    <p>No analytics budget exists, so metrics have to be self-tracked in-app rather than pulled from a paid dashboard:</p>
+    <ul>
+      <li>Verdict cards exported/shared (a simple counter on the export action)</li>
+      <li>Report Card page visits vs. general article visits (relative, not absolute — signal of whether the ledger is the draw)</li>
+      <li>Returning-visitor rate via a lightweight localStorage-based marker</li>
+    </ul>
+    <h3>Non-goals</h3>
+    <ul>
+      <li>Not attempting newsroom-scale, legally-adjudicated fact-checking.</li>
+      <li>Not covering every sitting politician on day one — launch with a focused, named top-N list (ministers/parties actually appearing in the existing ingested news pool) and grow it deliberately.</li>
+      <li>Not building real user authentication for the review queue — see §10's explicit scope limit.</li>
+    </ul>
+  </section>
+
+  <span class="part-divider">Part Two — Technical</span>
+
+  <section id="constraints">
+    <h2 class="sec"><span class="num">7</span>Constraints, Restated Plainly</h2>
+    <p>Everything below is designed against exactly what's actually available — nothing assumes a budget that doesn't exist:</p>
+    <ul>
+      <li><strong>Groq API</strong> — existing free-tier key(s), hard-capped at ~8,000 tokens per request. Already fully committed to the must-run article-rewrite pipeline; the new promise-extraction workload must not compete with it for that budget.</li>
+      <li><strong>Local Ollama</strong> — qwen2.5:7b-instruct (chat) + nomic-embed-text (embeddings), CPU inference, GPU-offload already enabled. Free, but slow and with a real quality ceiling on structured extraction — this is exactly why §10's human review queue is mandatory, not optional.</li>
+      <li><strong>No dedicated backend.</strong> Persistence stays in browser-local IndexedDB; server logic stays in stateless Vercel serverless functions with in-memory (cold-start-reset) rate limiting, matching every existing proxy in <span class="mono" style="font-family:var(--font-mono)">api/</span>.</li>
+      <li><strong>Single operator.</strong> There is no editorial desk. Any human-in-the-loop step has to be a two-minute approve/edit/reject action, not a workflow.</li>
+    </ul>
+  </section>
+
+  <section id="datamodel">
+    <h2 class="sec"><span class="num">8</span>Data Model</h2>
+    <p>Two new IndexedDB stores, added the same additive way <span style="font-family:var(--font-mono)">spinLedger</span> and <span style="font-family:var(--font-mono)">embeddings</span> were — bump <span style="font-family:var(--font-mono)">DB_VERSION</span>, never drop an existing store.</p>
+    <h3>Promise (the Vaada Clock's backing record)</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th class="mono">field</th><th class="mono">type</th><th>notes</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">id</td><td class="mono">string</td><td>stable id, independent of any one article</td></tr>
+          <tr><td class="mono">subjectName</td><td class="mono">string</td><td>politician or institution the promise belongs to</td></tr>
+          <tr><td class="mono">promiseText</td><td class="mono">string</td><td>the commitment, in the subject's own words where possible</td></tr>
+          <tr><td class="mono">category</td><td class="mono">string</td><td>maps to existing taxonomy verticals</td></tr>
+          <tr><td class="mono">originalDeadline</td><td class="mono">ISO date</td><td>never overwritten — the clock's zero point</td></tr>
+          <tr><td class="mono">currentDeadline</td><td class="mono">ISO date</td><td>latest active deadline</td></tr>
+          <tr><td class="mono">extensionHistory</td><td class="mono">array</td><td><span class="mono">{ from, to, extendedOn, sourceUrl }[]</span> — the full push trail</td></tr>
+          <tr><td class="mono">status</td><td class="mono">enum</td><td>Kept / Broken / Extended / Stalled / In Progress</td></tr>
+          <tr><td class="mono">evidenceLinks</td><td class="mono">string[]</td><td>required, non-empty before publish</td></tr>
+          <tr><td class="mono">trustTier</td><td class="mono">enum</td><td>AI-Flagged / Verified — gates public rendering</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h3>VerdictEvent (the L/W Ledger's backing record)</h3>
+    <p>Lighter-weight sibling for one-off event takes that aren't a long-running promise: <span class="mono" style="font-family:var(--font-mono)">{ id, headline, verdict: 'W'|'L', subjectName, sourceUrl, articleId, trustTier, createdAt }</span>.</p>
+  </section>
+
+  <section id="pipeline">
+    <h2 class="sec"><span class="num">9</span>Extraction Pipeline</h2>
+    <p>A new background service, <span class="mono" style="font-family:var(--font-mono)">promiseExtractionService.ts</span>, runs entirely on local Ollama — the Groq token budget stays reserved for the existing rewrite pipeline. It runs after an article has already passed quality-filtering, deduplication, and Groq rewrite (i.e. only on the same small, already-vetted stream everything else in the app already processes — not the raw multi-source firehose).</p>
+    <p>For each article, one structured-JSON Ollama pass asks two questions: does this contain a new dated commitment from a named politician or institution, and does it reference or update an <em>existing</em> tracked promise (matched via the reused embedding-similarity primitives from the former archive-chat infrastructure — see §13)? Either answer produces a candidate record — never a published one.</p>
+    <div class="callout-risk">
+      <strong>Why nothing here auto-publishes:</strong> a 7B local model making a structured factual claim about a real, named politician — a date, a deadline, a status — is exactly the kind of output that looks confident and is sometimes wrong. With no fact-checking budget to catch that after the fact, the only responsible design is: every extraction lands in the review queue, and nothing reaches a reader until a human has looked at the actual source excerpt next to the claim.
+    </div>
+  </section>
+
+  <section id="review">
+    <h2 class="sec"><span class="num">10</span>Review Queue</h2>
+    <p>A new, unlinked route — <span class="mono" style="font-family:var(--font-mono)">/ops/review</span> — gated by a passphrase compared client-side against a Vite env var. This is explicitly <strong>not</strong> real authentication; it's a deterrent appropriate to a zero-budget, single-operator tool, and nothing more sensitive than a moderation queue should ever sit behind it.</p>
+    <p>Each queued item shows the model's proposed record side-by-side with the exact source excerpt it was drawn from, with inline-editable fields and three actions: <strong>Approve</strong> (flips <span class="mono" style="font-family:var(--font-mono)">trustTier</span> to Verified and publishes), <strong>Edit &amp; Approve</strong>, or <strong>Reject</strong> (discarded, never shown).</p>
+  </section>
+
+  <section id="flow">
+    <h2 class="sec"><span class="num">11</span>End-to-End Flow</h2>
+    <pre class="mermaid">
+flowchart LR
+  A[Ingested article\n(RBI / NewsAPI / Guardian / GNews)] --> B[Quality filter + dedup\n(existing pipeline)]
+  B --> C[Groq rewrite\n(existing pipeline)]
+  C --> D[Ollama: promise/verdict\nextraction pass]
+  D -->|candidate record| E[(Review Queue\nIndexedDB)]
+  E -->|Approve| F[(Promise / VerdictEvent\nstore — trustTier: Verified)]
+  E -->|Reject| G[Discarded]
+  F --> H[Vaada Clock UI]
+  F --> I[L/W Ledger UI]
+  F --> J[Netaji Report Card v2]
+  H --> K[Verdict Card Engine\n→ shareable export]
+  I --> K
+  J --> K
+    </pre>
+  </section>
+
+  <section id="engine">
+    <h2 class="sec"><span class="num">12</span>Card Engine — Component Sketch</h2>
+    <p>Extends the existing canvas-based <span class="mono" style="font-family:var(--font-mono)">quoteCardService.ts</span> rather than replacing it — same brand chrome, same export mechanism, new type-specific layout branches:</p>
+    <div class="code-wrap"><pre class="code">interface VerdictCardInput {
+  type: 'quote' | 'lw-verdict' | 'promise-status' | 'report-card';
+  subjectName: string;
+  headline: string;
+  verdict?: 'W' | 'L' | Promise['status'];
+  sourceUrl: string;
+  trustTier: 'ai-flagged' | 'verified';
+}
+
+function renderVerdictCard(input: VerdictCardInput): HTMLCanvasElement</pre></div>
+    <p>Same export mechanism as today (canvas → PNG blob → native share sheet / download), so nothing about the sharing UX itself needs to change — only the range of things it can render.</p>
+  </section>
+
+  <section id="delete">
+    <h2 class="sec"><span class="num">13</span>What Gets Deleted</h2>
+    <p>The point of this section is precision — cut the gimmick, keep the plumbing underneath it where that plumbing is genuinely reusable:</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>File</th><th>Disposition</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">src/components/ArgumentSparringPartner.tsx</td><td class="verdict-kill">Delete outright</td></tr>
+          <tr><td class="mono">src/services/sparringService.ts</td><td class="verdict-kill">Delete outright</td></tr>
+          <tr><td class="mono">src/components/ArchiveChatModal.tsx</td><td class="verdict-kill">Delete outright</td></tr>
+          <tr><td class="mono">src/services/archiveChatService.ts</td><td class="verdict-kill">Delete outright</td></tr>
+          <tr><td class="mono">src/services/archiveEmbeddingService.ts</td><td class="verdict-evolve">Keep — repurposed for promise/subject matching (§9)</td></tr>
+          <tr><td class="mono">api/localEmbeddings.ts</td><td class="verdict-evolve">Keep — same embedding proxy, new caller</td></tr>
+          <tr><td class="mono">embeddings IndexedDB store</td><td class="verdict-evolve">Keep — same store, repurposed</td></tr>
+          <tr><td>Institutions leaderboard + profile views</td><td class="verdict-evolve">Superseded by Netaji Report Card v2 (§4.3), not deleted until the new page ships</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="rollout">
+    <h2 class="sec"><span class="num">14</span>Phased Rollout</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th class="mono">Phase</th><th>Scope</th><th>Reader-visible?</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">0 — Cleanup</td><td>Delete chatbot features (§13); generalize Quote Cards into the Verdict Card Engine (§4.4)</td><td>Yes — simpler nav, fewer half-used entry points</td></tr>
+          <tr><td class="mono">1 — Plumbing</td><td>Data model (§8), extraction pipeline (§9), review queue (§10)</td><td>No — invisible backend work</td></tr>
+          <tr><td class="mono">2 — Flagship</td><td>Vaada Clock + L/W Ledger UI (§4.1–4.2), fed by whatever's cleared review by then</td><td>Yes — the core pitch ships</td></tr>
+          <tr><td class="mono">3 — Report Card</td><td>Netaji Report Card v2 (§4.3), merging existing Spin Ledger + new Promise stats</td><td>Yes</td></tr>
+          <tr><td class="mono">4 — Stretch</td><td>ADR/MyNeta hard-facts enrichment, pending §15's open question</td><td>Yes, if unblocked</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="risks">
+    <h2 class="sec"><span class="num">15</span>Risks &amp; Open Questions</h2>
+    <div class="card l">
+      <span class="tag">Risk — model reliability</span>
+      A local 7B model will misread dates, misattribute a quote, or invent a deadline that sounds plausible. Mitigated structurally, not by hoping the model improves: nothing self-publishes (§9), every card carries its trust tier (§5), every verdict carries a source link.
+    </div>
+    <div class="card l">
+      <span class="tag">Risk — defamation exposure</span>
+      Naming real politicians in a "broken promise" ledger is the whole point, but also the whole legal risk. Mitigated by §5's guardrails and by keeping every verdict tied to outcomes, not character judgments.
+    </div>
+    <div class="card">
+      <span class="tag">Open question — not yet confirmed</span>
+      Whether ADR/myneta.info exposes a genuinely free, usable data path (API or bulk download) for the Phase 4 hard-facts enrichment hasn't been verified yet. Treated as unconfirmed and out of scope for Phases 0–3 rather than assumed available.
+    </div>
+    <div class="card">
+      <span class="tag">Risk — single-operator bottleneck</span>
+      One person reviewing every extraction doesn't scale past a handful of items a day. By design, the queue only ever sees the same small, already-filtered article stream the rest of the app processes — not a raw firehose — to keep the review workload realistic for one operator.
+    </div>
+  </section>
+
+  <footer class="doc-end">Operation Vaada — RAWINDIA PRD/TRD v1.0 — end of document</footer>
+
+</div>

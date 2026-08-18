@@ -1,0 +1,38 @@
+name: RAWINDIA Auto-Scraper
+
+on:
+  schedule:
+    # Runs every 6 hours automatically
+    - cron: '0 */6 * * *'
+  
+  # Allows you to click a "Run Now" button on GitHub manually
+  workflow_dispatch: 
+
+jobs:
+  scrape-news:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install playwright cheerio
+
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps chromium
+
+      - name: Run the Scraper
+        run: npx tsx src/lib/ingest/seed.ts
+
+      - name: Commit and push new data
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/data/ingestedSources.json
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-update: Scraped latest sources" && git push)

@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RAWINDIA - Unfiltered Journalism</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:ital,wght@0,400..700;1,400..700&amp;family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&amp;family=Work+Sans:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-surface": "#1c1b1b",
+                      "on-secondary-fixed-variant": "#8b0e45",
+                      "surface-bright": "#fcf9f8",
+                      "on-secondary-container": "#6e0034",
+                      "on-tertiary-container": "#848484",
+                      "on-secondary": "#ffffff",
+                      "on-secondary-fixed": "#3f001b",
+                      "surface-container-highest": "#e5e2e1",
+                      "error": "#ba1a1a",
+                      "tertiary-fixed-dim": "#c6c6c6",
+                      "outline": "#7e7576",
+                      "primary-fixed": "#e2e2e2",
+                      "inverse-on-surface": "#f3f0ef",
+                      "primary": "#000000",
+                      "on-primary-container": "#848484",
+                      "on-error-container": "#93000a",
+                      "secondary-fixed-dim": "#ffb1c5",
+                      "inverse-surface": "#313030",
+                      "surface": "#fcf9f8",
+                      "on-tertiary": "#ffffff",
+                      "on-primary-fixed-variant": "#474747",
+                      "primary-fixed-dim": "#c6c6c6",
+                      "inverse-primary": "#c6c6c6",
+                      "outline-variant": "#cfc4c5",
+                      "on-surface-variant": "#4c4546",
+                      "surface-container-low": "#f6f3f2",
+                      "tertiary-fixed": "#e2e2e2",
+                      "on-error": "#ffffff",
+                      "on-background": "#1c1b1b",
+                      "surface-tint": "#5e5e5e",
+                      "on-tertiary-fixed-variant": "#474747",
+                      "secondary": "#ab2c5d",
+                      "secondary-container": "#fd6c9c",
+                      "surface-container": "#f0eded",
+                      "tertiary": "#000000",
+                      "error-container": "#ffdad6",
+                      "surface-variant": "#e5e2e1",
+                      "surface-container-lowest": "#ffffff",
+                      "secondary-fixed": "#ffd9e1",
+                      "surface-container-high": "#eae7e7",
+                      "on-primary": "#ffffff",
+                      "background": "#fcf9f8",
+                      "on-tertiary-fixed": "#1b1b1b",
+                      "primary-container": "#1b1b1b",
+                      "surface-dim": "#dcd9d9",
+                      "tertiary-container": "#1b1b1b",
+                      "on-primary-fixed": "#1b1b1b"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "gutter": "24px",
+                      "margin-desktop": "40px",
+                      "stack-md": "16px",
+                      "stack-sm": "8px",
+                      "margin-mobile": "16px",
+                      "stack-lg": "32px",
+                      "section-gap": "64px"
+              },
+              "fontFamily": {
+                      "headline-xl": [
+                              "Libre Caslon Text"
+                      ],
+                      "label-caps": [
+                              "Archivo Narrow"
+                      ],
+                      "body-sm": [
+                              "Work Sans"
+                      ],
+                      "headline-lg": [
+                              "Libre Caslon Text"
+                      ],
+                      "display-lg": [
+                              "Libre Caslon Text"
+                      ],
+                      "meta": [
+                              "Work Sans"
+                      ],
+                      "body-md": [
+                              "Work Sans"
+                      ],
+                      "headline-lg-mobile": [
+                              "Libre Caslon Text"
+                      ]
+              },
+              "fontSize": {
+                      "headline-xl": [
+                              "48px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "label-caps": [
+                              "14px",
+                              {
+                                      "lineHeight": "1",
+                                      "letterSpacing": "0.1em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-sm": [
+                              "16px",
+                              {
+                                      "lineHeight": "1.5",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "1.3",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "display-lg": [
+                              "64px",
+                              {
+                                      "lineHeight": "1.1",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "meta": [
+                              "13px",
+                              {
+                                      "lineHeight": "1",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "body-md": [
+                              "18px",
+                              {
+                                      "lineHeight": "1.6",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "28px",
+                              {
+                                      "lineHeight": "1.3",
+                                      "fontWeight": "600"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        body {
+            background-color: #fcf9f8;
+            color: #1c1b1b;
+        }
+      </style>
+</head>
+<body class="bg-surface text-on-surface antialiased selection:bg-secondary selection:text-white flex flex-col min-h-screen">
+<!-- TopNavBar (Derived from JSON) -->
+<header class="bg-surface dark:bg-on-surface docked full-width top-0 z-50 sticky shadow-sm transition-all border-b-2 border-primary dark:border-surface-variant">
+<div class="flex flex-col w-full max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop">
+<!-- Top Branding Row -->
+<div class="flex items-center justify-between py-stack-md border-b border-primary/20 dark:border-outline-variant/30">
+<div class="flex items-center gap-4">
+<button aria-label="Menu" class="p-2 -ml-2 text-primary dark:text-on-primary hover:bg-secondary dark:hover:bg-on-secondary-fixed-variant hover:text-on-secondary transition-colors duration-150 rounded-full">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">menu</span>
+</button>
+<a class="font-display-lg text-display-lg font-bold tracking-tighter text-on-surface dark:text-surface-bright uppercase" href="#">
+                        RAWINDIA
+                    </a>
+</div>
+<div class="flex items-center gap-6">
+<button class="font-label-caps text-label-caps uppercase px-6 py-2 bg-primary text-white hover:bg-secondary transition-colors duration-150 rounded-none border border-primary">
+                        Subscribe
+                    </button>
+<button aria-label="Search" class="p-2 text-primary dark:text-on-primary hover:bg-secondary dark:hover:bg-on-secondary-fixed-variant hover:text-on-secondary transition-colors duration-150 rounded-full">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">search</span>
+</button>
+</div>
+</div>
+<!-- Navigation Row -->
+<nav class="hidden md:flex items-center overflow-x-auto hide-scrollbar py-3 gap-8">
+<a class="text-primary dark:text-secondary font-bold border-b-4 border-primary dark:border-secondary font-label-caps text-label-caps uppercase pb-1 whitespace-nowrap active" href="#">
+                    National
+                </a>
+<a class="text-on-surface-variant dark:text-outline-variant font-label-caps text-label-caps uppercase hover:text-primary dark:hover:text-white transition-colors duration-150 whitespace-nowrap pb-1" href="#">
+                    States
+                </a>
+<a class="text-on-surface-variant dark:text-outline-variant font-label-caps text-label-caps uppercase hover:text-primary dark:hover:text-white transition-colors duration-150 whitespace-nowrap pb-1" href="#">
+                    World
+                </a>
+<a class="text-on-surface-variant dark:text-outline-variant font-label-caps text-label-caps uppercase hover:text-primary dark:hover:text-white transition-colors duration-150 whitespace-nowrap pb-1" href="#">
+                    Business
+                </a>
+<a class="text-on-surface-variant dark:text-outline-variant font-label-caps text-label-caps uppercase hover:text-primary dark:hover:text-white transition-colors duration-150 whitespace-nowrap pb-1" href="#">
+                    Tech
+                </a>
+<a class="text-on-surface-variant dark:text-outline-variant font-label-caps text-label-caps uppercase hover:text-primary dark:hover:text-white transition-colors duration-150 whitespace-nowrap pb-1" href="#">
+                    Opinion
+                </a>
+</nav>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow w-full max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop py-stack-lg flex flex-col md:flex-row gap-gutter">
+<!-- Article Core (Left/Main Column) -->
+<article class="flex-grow md:w-8/12 lg:w-9/12 border-r-0 md:border-r border-primary pr-0 md:pr-gutter">
+<!-- Headline & Meta -->
+<header class="mb-stack-lg">
+<div class="inline-block border border-primary px-3 py-1 mb-stack-sm bg-surface">
+<span class="font-label-caps text-label-caps uppercase text-primary tracking-widest">NEWS</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-primary mb-stack-md leading-tight">
+                    Union Cabinet Clears Historic Infrastructure Bill, Overriding Opposition Protest
+                </h1>
+<p class="font-body-md text-body-md text-on-surface-variant mb-stack-md leading-relaxed max-w-3xl">
+                    The $40B package aims to overhaul tier-2 city connectivity by 2028. Critics point to rushed environmental clearances, while proponents highlight immediate job creation metrics.
+                </p>
+<div class="flex items-center gap-4 border-y border-primary/20 py-3 mb-stack-lg">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-sm" style="font-variation-settings: 'FILL' 0;">edit</span>
+<span class="font-meta text-meta uppercase text-on-surface-variant tracking-wider">By Vikram Sahay</span>
+</div>
+<span class="text-outline-variant">|</span>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-sm" style="font-variation-settings: 'FILL' 0;">schedule</span>
+<time class="font-meta text-meta uppercase text-on-surface-variant tracking-wider">Oct 24, 2024 • 14:30 IST</time>
+</div>
+</div>
+</header>
+<!-- Hero Image -->
+<figure class="mb-section-gap border border-primary p-1 bg-white">
+<img alt="Parliament building exterior" class="w-full h-auto object-cover aspect-video grayscale contrast-125" data-alt="A high-contrast black and white photograph of an empty, imposing government building facade with large columns. A single small figure walks up the wide steps. The image is stark, clinical, and slightly underexposed to emphasize the imposing architecture, fitting the editorial brutalism style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRgqSUrZjfKZb6UOub2_Ql0ghEZpDtReM75OCvodleP-EsBYEVujTFHxQfTwhxHOCWx7sFgVN649HzgMvjmg4oiKcE9uiB6pWGIw0lyjdy97e4Fs7EscYsMO8PUh2M7N-C56tUAVoXdYgKrDw_LHbFTknpf0OsSKkjsyCDT4jc-FBilC9WVGZrJnpo3_m-aPhUzxEwj7gozkd6q7YRNC0kyWFBgTLwdZz-qgad5p3iA1dZeLw2p3vU"/>
+<figcaption class="font-meta text-meta text-on-surface-variant mt-2 pb-2 border-b border-primary/20 italic text-right">
+                    File photo of the legislative assembly approach. [Image: RAWINDIA Visuals]
+                </figcaption>
+</figure>
+<!-- The Fact Layer -->
+<div class="bg-surface-container-low border-2 border-primary p-stack-md mb-section-gap relative">
+<div class="absolute -top-3 left-4 bg-primary text-white px-3 py-1">
+<span class="font-label-caps text-label-caps uppercase tracking-widest flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">verified</span>
+                        The Fact Layer
+                    </span>
+</div>
+<ul class="mt-stack-sm space-y-4">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary mt-1 flex-shrink-0" style="font-variation-settings: 'FILL' 1;">arrow_right_alt</span>
+<div>
+<strong class="font-body-md text-body-md font-bold block mb-1">Bill Passed:</strong>
+<span class="font-body-sm text-body-sm">The National Connectivity &amp; Infrastructure Modernization Act was cleared by cabinet voice vote at 11:45 AM.</span>
+</div>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary mt-1 flex-shrink-0" style="font-variation-settings: 'FILL' 1;">arrow_right_alt</span>
+<div>
+<strong class="font-body-md text-body-md font-bold block mb-1">Financial Commitment:</strong>
+<span class="font-body-sm text-body-sm">₹3.2 Lakh Crore ($40 Billion USD) allocated over the next four fiscal years. <a class="text-secondary underline hover:bg-secondary hover:text-white px-1" href="#">Source: Ministry of Finance Memo 10/24</a></span>
+</div>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary mt-1 flex-shrink-0" style="font-variation-settings: 'FILL' 1;">arrow_right_alt</span>
+<div>
+<strong class="font-body-md text-body-md font-bold block mb-1">Opposition Stance:</strong>
+<span class="font-body-sm text-body-sm">A coalition of 4 regional parties walked out before the vote, citing circumvention of the standing committee review process.</span>
+</div>
+</li>
+</ul>
+</div>
+<!-- Article Body -->
+<div class="prose max-w-none font-body-md text-body-md leading-relaxed text-on-surface space-y-6">
+<p>
+<span class="font-bold text-xl float-left mr-2 mt-1 leading-none">N</span>EW DELHI — In a decisive and controversial maneuver, the central government pushed through its flagship infrastructure spending package this morning, bypassing traditional parliamentary committee reviews to fast-track implementation.
+                </p>
+<p>
+                    The move, defended by the administration as essential for maintaining economic momentum post-Q2 contraction, immediately drew ire from opposition benches who decried the process as "legislative bulldozing."
+                </p>
+<h3 class="font-headline-lg text-headline-lg mt-stack-lg mb-stack-md border-b-2 border-primary inline-block pb-1">The Rush for Clearance</h3>
+<p>
+                    Documents obtained by RAWINDIA indicate that environmental impact assessments (EIAs) for three key highway corridors bundled in the bill were expedited. <span class="bg-surface-container px-1 font-mono text-sm border border-outline-variant">[Official Statement]</span> The Ministry of Environment stated that "rapid assessment protocols were followed strictly in accordance with 2023 emergency provisions."
+                </p>
+<p>
+                    However, local advocacy groups point to procedural anomalies. "They are rubber-stamping destruction," said an organizer outside the secretariat. <span class="bg-surface-container px-1 font-mono text-sm border border-outline-variant">[Eyewitness]</span> Protests numbering in the hundreds formed outside the northern gate shortly after the announcement.
+                </p>
+<!-- Pull Quote -->
+<blockquote class="my-section-gap border-l-4 border-secondary pl-stack-md py-2 bg-surface-container-low italic font-headline-lg-mobile text-headline-lg-mobile text-on-surface-variant">
+                    "We cannot afford bureaucratic paralysis while global supply chains are realigning. This is about national competitiveness, not procedural vanity."
+                    <footer class="mt-4 font-meta text-meta not-italic text-outline-variant uppercase">
+                        — Finance Minister, Press Briefing
+                    </footer>
+</blockquote>
+<p>
+                    The implementation timeline mandates ground-breaking on initial projects by January 1st. State governments, responsible for land acquisition, have expressed concern over the aggressive schedule. Several chief ministers from non-aligned states have requested immediate emergency meetings with the PMO to discuss funding mechanisms, as state-level matching contributions remain ambiguous in the drafted text.
+                </p>
+</div>
+<!-- Correction Log -->
+<div class="mt-section-gap pt-stack-md border-t-2 border-primary border-dashed">
+<h4 class="font-label-caps text-label-caps uppercase tracking-widest text-on-surface-variant mb-3 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">history</span> Correction Log
+                </h4>
+<div class="bg-surface-container-lowest border border-outline-variant p-4 font-body-sm text-body-sm">
+<p class="text-on-surface-variant">
+<span class="font-bold text-primary">Update 15:00 IST:</span> An earlier version of this article misstated the total allocation as ₹3.4 Lakh Crore. The correct figure, per the final cabinet memo, is ₹3.2 Lakh Crore.
+                    </p>
+</div>
+</div>
+</article>
+<!-- Sidebar (Pulse Data & Related) -->
+<aside class="w-full md:w-4/12 lg:w-3/12 flex flex-col gap-stack-lg">
+<!-- Pulse Data Box -->
+<div class="border border-primary bg-primary text-white p-4">
+<div class="flex items-center justify-between mb-4 pb-2 border-b border-surface-tint">
+<h3 class="font-label-caps text-label-caps uppercase tracking-widest flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">analytics</span>
+                        Pulse Data
+                    </h3>
+<span class="text-xs font-mono text-surface-tint">LIVE</span>
+</div>
+<p class="font-meta text-meta text-surface-dim mb-4 leading-tight">
+                    Real-time sentiment analysis of verified public statements regarding the Infrastructure Bill (Last 24hrs).
+                </p>
+<div class="space-y-4">
+<div>
+<div class="flex justify-between font-meta text-meta mb-1">
+<span>Supportive (Industry/Gov)</span>
+<span class="font-bold">42%</span>
+</div>
+<div class="w-full bg-surface-tint h-2">
+<div class="bg-white h-2" style="width: 42%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between font-meta text-meta mb-1">
+<span>Critical (Opposition/NGO)</span>
+<span class="font-bold">38%</span>
+</div>
+<div class="w-full bg-surface-tint h-2">
+<div class="bg-secondary h-2" style="width: 38%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between font-meta text-meta mb-1 text-surface-variant">
+<span>Neutral/Awaiting Details</span>
+<span>20%</span>
+</div>
+<div class="w-full bg-surface-tint h-2">
+<div class="bg-surface-variant h-2" style="width: 20%"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Related Briefs -->
+<div class="border border-primary p-4 bg-surface">
+<h3 class="font-label-caps text-label-caps uppercase tracking-widest border-b border-primary pb-2 mb-4">Contextual Briefs</h3>
+<ul class="space-y-4 divide-y divide-primary/20">
+<li class="pt-0">
+<a class="group block" href="#">
+<span class="text-xs font-mono text-secondary mb-1 block group-hover:text-primary transition-colors">Oct 20</span>
+<h4 class="font-body-sm text-body-sm font-bold group-hover:underline">Draft EIA Rules Diluted Ahead of Winter Session</h4>
+</a>
+</li>
+<li class="pt-4">
+<a class="group block" href="#">
+<span class="text-xs font-mono text-secondary mb-1 block group-hover:text-primary transition-colors">Oct 15</span>
+<h4 class="font-body-sm text-body-sm font-bold group-hover:underline">State Deficits Hit Record High Amidst Federal Push for Co-Funding</h4>
+</a>
+</li>
+<li class="pt-4">
+<a class="group block" href="#">
+<span class="text-xs font-mono text-secondary mb-1 block group-hover:text-primary transition-colors">Sep 28</span>
+<h4 class="font-body-sm text-body-sm font-bold group-hover:underline">Regional Parties Threaten Boycott Over Committee Bypasses</h4>
+</a>
+</li>
+</ul>
+</div>
+<!-- Ad Placeholder -->
+<div class="w-full aspect-square bg-surface-container-highest border border-outline-variant flex items-center justify-center p-4 text-center">
+<span class="font-meta text-meta text-outline-variant uppercase tracking-widest">Advertisement Space</span>
+</div>
+</aside>
+</main>
+<!-- Footer (Derived from JSON) -->
+<footer class="bg-on-surface dark:bg-surface-container-lowest border-t-4 border-secondary dark:border-secondary-container mt-auto">
+<div class="w-full py-section-gap px-margin-mobile md:px-margin-desktop max-w-7xl mx-auto flex flex-col gap-stack-lg">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 border-b border-surface-tint/30 pb-stack-lg">
+<a class="font-headline-xl text-headline-xl text-surface dark:text-primary tracking-tighter uppercase" href="#">
+                    RAWINDIA
+                </a>
+<div class="flex flex-wrap gap-x-6 gap-y-3">
+<a class="font-body-sm text-body-sm text-surface-variant opacity-80 hover:text-secondary-fixed transition-colors" href="#">About Us</a>
+<a class="font-body-sm text-body-sm text-surface-variant opacity-80 hover:text-secondary-fixed transition-colors" href="#">Fact-Check Policy</a>
+<a class="font-body-sm text-body-sm text-surface-variant opacity-80 hover:text-secondary-fixed transition-colors" href="#">Editorial Team</a>
+<a class="font-body-sm text-body-sm text-surface-variant opacity-80 hover:text-secondary-fixed transition-colors" href="#">Contact</a>
+<a class="font-body-sm text-body-sm text-surface-variant opacity-80 hover:text-secondary-fixed transition-colors" href="#">Grievance Redressal</a>
+<a class="font-body-sm text-body-sm text-surface-variant opacity-80 hover:text-secondary-fixed transition-colors" href="#">Careers</a>
+</div>
+</div>
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 text-surface-variant opacity-60 font-meta text-meta">
+<p>© 2024 RAWINDIA NEWS PORTAL. Compliant with IT Rules 2021. All Rights Reserved.</p>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 0;">shield</span>
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 0;">verified</span>
+</div>
+</div>
+</div>
+</footer>
+</body></html>

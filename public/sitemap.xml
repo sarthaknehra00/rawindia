@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Static, hand-maintained. Deliberately excludes article URLs: there's no
+  server-side datastore that can vouch for which article IDs exist for a
+  fresh visitor (they live in each visitor's local IndexedDB archive, sourced
+  live from third-party APIs), so listing them would mislead crawlers rather
+  than help them. Also excludes the 'social-pulse' and 'viral-claim-tracker'
+  taxonomy verticals — leftover categories for features removed from the
+  site; not routed here on purpose (worth pruning from taxonomyData.ts too).
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>/</loc><changefreq>hourly</changefreq><priority>1.0</priority></url>
+  <url><loc>/live</loc><changefreq>hourly</changefreq></url>
+  <url><loc>/today</loc><changefreq>daily</changefreq></url>
+  <url><loc>/week</loc><changefreq>daily</changefreq></url>
+  <url><loc>/month</loc><changefreq>daily</changefreq></url>
+  <url><loc>/section/india-national</loc></url>
+  <url><loc>/section/states-uts</loc></url>
+  <url><loc>/section/world-india-lens</loc></url>
+  <url><loc>/section/business-economy</loc></url>
+  <url><loc>/section/technology</loc></url>
+  <url><loc>/section/science-environment</loc></url>
+  <url><loc>/section/sports</loc></url>
+  <url><loc>/section/entertainment</loc></url>
+  <url><loc>/section/lifestyle</loc></url>
+  <url><loc>/section/education-careers</loc></url>
+  <url><loc>/section/automobile</loc></url>
+  <url><loc>/section/real-estate</loc></url>
+  <url><loc>/section/religion-spirituality</loc></url>
+  <url><loc>/section/opinion-analysis</loc></url>
+  <url><loc>/section/specials</loc></url>
+  <url><loc>/section/media-formats</loc></url>
+</urlset>

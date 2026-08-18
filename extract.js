@@ -1,0 +1,1 @@
+const fs = require('fs'); const content = fs.readFileSync('dist/assets/index-DYwUxPVp.js', 'utf8'); const idx = content.indexOf('Karnataka enacts'); console.log('Found at:', idx); console.log(content.substring(Math.max(0, idx - 100), idx + 500));

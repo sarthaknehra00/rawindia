@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Uttar Pradesh News - RAWINDIA</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:ital,wght@0,400..700;1,400..700&amp;family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&amp;family=Work+Sans:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface": "#1c1b1b",
+                        "on-secondary-fixed-variant": "#8b0e45",
+                        "surface-bright": "#fcf9f8",
+                        "on-secondary-container": "#6e0034",
+                        "on-tertiary-container": "#848484",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-fixed": "#3f001b",
+                        "surface-container-highest": "#e5e2e1",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed-dim": "#c6c6c6",
+                        "outline": "#7e7576",
+                        "primary-fixed": "#e2e2e2",
+                        "inverse-on-surface": "#f3f0ef",
+                        "primary": "#000000",
+                        "on-primary-container": "#848484",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed-dim": "#ffb1c5",
+                        "inverse-surface": "#313030",
+                        "surface": "#fcf9f8",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed-variant": "#474747",
+                        "primary-fixed-dim": "#c6c6c6",
+                        "inverse-primary": "#c6c6c6",
+                        "outline-variant": "#cfc4c5",
+                        "on-surface-variant": "#4c4546",
+                        "surface-container-low": "#f6f3f2",
+                        "tertiary-fixed": "#e2e2e2",
+                        "on-error": "#ffffff",
+                        "on-background": "#1c1b1b",
+                        "surface-tint": "#5e5e5e",
+                        "on-tertiary-fixed-variant": "#474747",
+                        "secondary": "#ab2c5d",
+                        "secondary-container": "#fd6c9c",
+                        "surface-container": "#f0eded",
+                        "tertiary": "#000000",
+                        "error-container": "#ffdad6",
+                        "surface-variant": "#e5e2e1",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed": "#ffd9e1",
+                        "surface-container-high": "#eae7e7",
+                        "on-primary": "#ffffff",
+                        "background": "#fcf9f8",
+                        "on-tertiary-fixed": "#1b1b1b",
+                        "primary-container": "#1b1b1b",
+                        "surface-dim": "#dcd9d9",
+                        "tertiary-container": "#1b1b1b",
+                        "on-primary-fixed": "#1b1b1b"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "margin-desktop": "40px",
+                        "stack-md": "16px",
+                        "stack-sm": "8px",
+                        "margin-mobile": "16px",
+                        "stack-lg": "32px",
+                        "section-gap": "64px"
+                    },
+                    "fontFamily": {
+                        "headline-xl": ["Libre Caslon Text"],
+                        "label-caps": ["Archivo Narrow"],
+                        "body-sm": ["Work Sans"],
+                        "headline-lg": ["Libre Caslon Text"],
+                        "display-lg": ["Libre Caslon Text"],
+                        "meta": ["Work Sans"],
+                        "body-md": ["Work Sans"],
+                        "headline-lg-mobile": ["Libre Caslon Text"]
+                    },
+                    "fontSize": {
+                        "headline-xl": ["48px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "label-caps": ["14px", { "lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "700" }],
+                        "body-sm": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "display-lg": ["64px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "meta": ["13px", { "lineHeight": "1", "fontWeight": "500" }],
+                        "body-md": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "1.3", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .news-border { border: 1px solid #000; }
+        .news-border-b { border-bottom: 1px solid #000; }
+        .news-border-t { border-top: 1px solid #000; }
+        .news-border-r { border-right: 1px solid #000; }
+        .news-border-l { border-left: 1px solid #000; }
+        .heavy-rule { border-bottom: 3px solid #000; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-sm antialiased">
+<!-- TopNavBar (Web) -->
+<header class="hidden md:flex bg-surface dark:bg-on-surface text-primary dark:text-on-primary docked full-width top-0 border-b-2 border-primary dark:border-surface-variant flex-col w-full max-w-7xl mx-auto px-margin-desktop z-40 sticky">
+<div class="flex items-center justify-between py-4">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-3xl cursor-pointer hover:text-secondary transition-colors" data-icon="menu">menu</span>
+</div>
+<div class="font-display-lg text-display-lg font-bold tracking-tighter text-on-surface dark:text-surface-bright uppercase">
+                RAWINDIA
+            </div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2 border-b border-primary pb-1">
+<span class="material-symbols-outlined text-sm" data-icon="search">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm font-label-caps placeholder:text-outline w-32 focus:w-48 transition-all" placeholder="Search..." type="text"/>
+</div>
+<button class="bg-primary text-on-primary font-label-caps text-label-caps px-4 py-2 hover:bg-secondary hover:text-on-secondary transition-colors duration-150 uppercase">Subscribe</button>
+</div>
+</div>
+<nav class="flex items-center justify-center gap-8 py-3">
+<a class="text-on-surface-variant dark:text-outline-variant font-label-caps uppercase hover:bg-secondary dark:hover:bg-on-secondary-fixed-variant hover:text-on-secondary transition-colors duration-150 px-2 py-1" href="#">National</a>
+<a class="text-primary dark:text-secondary font-bold border-b-4 border-primary dark:border-secondary font-label-caps uppercase px-2 py-1" href="#">States</a>
+<a class="text-on-surface-variant dark:text-outline-variant font-label-caps uppercase hover:bg-secondary dark:hover:bg-on-secondary-fixed-variant hover:text-on-secondary transition-colors duration-150 px-2 py-1" href="#">World</a>
+<a class="text-on-surface-variant dark:text-outline-variant font-label-caps uppercase hover:bg-secondary dark:hover:bg-on-secondary-fixed-variant hover:text-on-secondary transition-colors duration-150 px-2 py-1" href="#">Business</a>
+<a class="text-on-surface-variant dark:text-outline-variant font-label-caps uppercase hover:bg-secondary dark:hover:bg-on-secondary-fixed-variant hover:text-on-secondary transition-colors duration-150 px-2 py-1" href="#">Tech</a>
+<a class="text-on-surface-variant dark:text-outline-variant font-label-caps uppercase hover:bg-secondary dark:hover:bg-on-secondary-fixed-variant hover:text-on-secondary transition-colors duration-150 px-2 py-1" href="#">Opinion</a>
+</nav>
+</header>
+<!-- TopNavBar (Mobile) -->
+<header class="md:hidden flex bg-surface text-primary border-b-2 border-primary flex-col w-full px-margin-mobile z-40 sticky top-0 py-4">
+<div class="flex items-center justify-between">
+<span class="material-symbols-outlined text-3xl" data-icon="menu">menu</span>
+<div class="font-headline-lg-mobile text-headline-lg-mobile font-bold tracking-tighter uppercase">RAWINDIA</div>
+<span class="material-symbols-outlined text-2xl" data-icon="search">search</span>
+</div>
+</header>
+<main class="w-full max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop py-stack-lg">
+<!-- Breadcrumbs & Header -->
+<div class="mb-stack-lg border-b border-primary pb-4">
+<div class="font-label-caps text-label-caps text-on-surface-variant mb-2 flex items-center gap-2 uppercase">
+<a class="hover:text-primary" href="#">Home</a>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<a class="hover:text-primary" href="#">States</a>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<span class="text-primary font-bold">Uttar Pradesh</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl mb-4">Uttar Pradesh</h1>
+<!-- Sub-category Nav -->
+<div class="flex flex-wrap gap-4 font-label-caps text-label-caps uppercase">
+<a class="bg-primary text-on-primary px-3 py-1" href="#">All UP</a>
+<a class="news-border px-3 py-1 hover:bg-surface-container transition-colors" href="#">State Politics</a>
+<a class="news-border px-3 py-1 hover:bg-surface-container transition-colors" href="#">Local Crime</a>
+<a class="news-border px-3 py-1 hover:bg-surface-container transition-colors" href="#">Infra</a>
+<a class="news-border px-3 py-1 hover:bg-surface-container transition-colors" href="#">Local Economy</a>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Main Content Area -->
+<div class="lg:col-span-8 flex flex-col gap-stack-lg">
+<!-- Lead Story -->
+<article class="news-border p-4">
+<div class="inline-block bg-primary text-on-primary font-label-caps text-label-caps px-2 py-1 mb-stack-sm uppercase">PULSE</div>
+<img class="w-full h-80 object-cover mb-stack-md grayscale" data-alt="A striking black and white documentary-style photograph showing political workers in a heated discussion outside the state assembly building in Lucknow. High contrast, raw lighting, gritty texture, emphasizing the intensity of state politics." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNXJZ1R_6xSASCFl8XYzC5uvHzykKdmHYVQz6ucJVxPuZjPS8lsmCCT0caicbNAasPaomdgBxpWmveJsdlkyPhiYaRqvDhbqIzedYhX57-20zFQT2eM4Qlt9I4NO-xgRpPc1gf-X5E6Gi-cEDQW6JJAKl0aQexVw3KMVFcVUyOD17sTfwjvfcV95t1w26vgQ-e0erBkFIm0WqZC7kOK8A60sxLFAFKc4pAeQsv7J85Aa0CCPZuQfvf"/>
+<h2 class="font-headline-lg text-headline-lg mb-stack-sm">Massive Cabinet Reshuffle Expected Ahead of Assembly Session</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4">Speculation mounts in Lucknow as the Chief Minister summons key allies for emergency meetings. The upcoming monsoon session is anticipated to be turbulent.</p>
+<div class="font-meta text-meta text-outline italic">By State Bureau | 2 Hours Ago</div>
+</article>
+<!-- Filters -->
+<div class="flex flex-wrap items-center justify-between border-y border-primary py-2 font-label-caps text-label-caps uppercase text-xs">
+<div class="flex gap-4">
+<span class="font-bold flex items-center gap-1"><span class="material-symbols-outlined text-sm">filter_list</span> Filter:</span>
+<select class="bg-transparent border-none py-0 pl-0 focus:ring-0 text-xs font-label-caps cursor-pointer">
+<option>Any Date</option>
+<option>Past 24 Hours</option>
+<option>Past Week</option>
+</select>
+<select class="bg-transparent border-none py-0 pl-0 focus:ring-0 text-xs font-label-caps cursor-pointer">
+<option>All Types</option>
+<option>Articles</option>
+<option>Videos</option>
+</select>
+</div>
+<label class="flex items-center gap-2 cursor-pointer">
+<input class="form-checkbox border-primary text-primary focus:ring-primary h-4 w-4 rounded-none" type="checkbox"/>
+<span>Verified Only</span>
+</label>
+</div>
+<!-- Feed Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<article class="news-border-b pb-4">
+<div class="inline-block news-border font-label-caps text-label-caps px-2 py-0.5 mb-2 uppercase text-xs">INFRA</div>
+<h3 class="font-headline-lg text-headline-lg text-2xl mb-2">New Expressway Project Faces Land Acquisition Hurdles in Eastern UP</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-2">Farmers protest proposed compensation rates, stalling construction on the critical stretch connecting key eastern districts.</p>
+<div class="font-meta text-meta text-outline italic">Yesterday</div>
+</article>
+<article class="news-border-b pb-4">
+<div class="inline-block news-border font-label-caps text-label-caps px-2 py-0.5 mb-2 uppercase text-xs">CRIME</div>
+<h3 class="font-headline-lg text-headline-lg text-2xl mb-2">High-Profile Extortion Racket Busted in Kanpur</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-2">Special Task Force raids multiple locations, apprehending three key figures linked to a statewide syndicate.</p>
+<div class="font-meta text-meta text-outline italic">Yesterday</div>
+</article>
+</div>
+</div>
+<!-- Sidebar -->
+<aside class="lg:col-span-4 flex flex-col gap-stack-lg">
+<!-- Metro Hub Focus -->
+<div class="news-border p-4 bg-surface-container-low">
+<div class="flex items-center justify-between mb-4 border-b border-primary pb-2">
+<h3 class="font-headline-lg text-headline-lg text-xl uppercase tracking-tighter">Metro Hub</h3>
+<span class="material-symbols-outlined" data-icon="location_city">location_city</span>
+</div>
+<div class="flex flex-col gap-4">
+<div>
+<div class="font-label-caps text-label-caps text-secondary mb-1 uppercase">Lucknow</div>
+<h4 class="font-headline-lg text-headline-lg text-lg mb-1 leading-tight hover:underline cursor-pointer">Municipal Corporation Announces Drive Against Illegal Encroachments</h4>
+<div class="font-meta text-meta text-outline italic">Urban Planning</div>
+</div>
+<hr class="border-t border-outline-variant"/>
+<div>
+<div class="font-label-caps text-label-caps text-secondary mb-1 uppercase">Noida</div>
+<h4 class="font-headline-lg text-headline-lg text-lg mb-1 leading-tight hover:underline cursor-pointer">Tech Park Expansion Approvals Fast-Tracked to Attract IT Giants</h4>
+<div class="font-meta text-meta text-outline italic">Economy</div>
+</div>
+</div>
+</div>
+<!-- Ground Report Teaser -->
+<div class="bg-primary text-on-primary p-4 news-border border-primary">
+<div class="inline-block bg-secondary text-on-secondary font-label-caps text-label-caps px-2 py-1 mb-4 uppercase">GROUND REPORT</div>
+<img class="w-full h-48 object-cover mb-4 grayscale" data-alt="A stark, high-contrast black and white photo showing dry, cracked agricultural land in Bundelkhand under a harsh sun. A lone farmer stands in the distance. The mood is clinical, raw, and desperate." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPdx9DO1H8BzTnpK2V6bOhndBq3Z5_r0W9Y-uj1lA0vqRKKMTeYw6P3X4snSOrkwdz2AeGXy1U6za4-Q2_-RYpu9aXnmspMYI-AecAz0uWFkzpMSjEmXagAEsULq2kLoFsjTIiG3DTfY9JLpjGe7C1GUeGDASLFqoSTT08wApREEjiNgBAZlTEzv94PLAeC7yQdArkoiO8tbwPBqtKIMd8Qdpu_NwirsWL9QlXe5UGRi6Up65Vn5nE"/>
+<h3 class="font-headline-lg text-headline-lg text-xl mb-2 text-surface">The Water Crisis Deepens in Bundelkhand</h3>
+<p class="font-body-sm text-body-sm text-surface-variant mb-4">An exclusive look into the failing irrigation systems and the bureaucratic apathy leaving thousands of acres barren.</p>
+<a class="inline-flex items-center gap-2 font-label-caps text-label-caps border border-surface px-4 py-2 hover:bg-surface hover:text-primary transition-colors uppercase" href="#">Read Full Report <span class="material-symbols-outlined text-sm">arrow_forward</span></a>
+</div>
+</aside>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-section-gap px-margin-mobile md:px-margin-desktop max-w-7xl mx-auto flex flex-col gap-stack-lg bg-on-surface dark:bg-surface-container-lowest text-surface dark:text-on-surface font-body-sm border-t-4 border-secondary dark:border-secondary-container mt-section-gap">
+<div class="flex flex-col md:flex-row justify-between items-start gap-8">
+<div>
+<div class="font-headline-xl text-headline-xl text-surface dark:text-primary mb-4 uppercase tracking-tighter">RAWINDIA</div>
+<p class="text-surface-variant max-w-xs font-meta">Unfiltered Journalism. The Raw Truth.</p>
+</div>
+<div class="flex flex-wrap gap-x-8 gap-y-4">
+<a class="font-label-caps text-label-caps text-surface-variant opacity-80 hover:text-secondary-fixed transition-colors uppercase" href="#">About Us</a>
+<a class="font-label-caps text-label-caps text-surface-variant opacity-80 hover:text-secondary-fixed transition-colors uppercase" href="#">Fact-Check Policy</a>
+<a class="font-label-caps text-label-caps text-surface-variant opacity-80 hover:text-secondary-fixed transition-colors uppercase" href="#">Editorial Team</a>
+<a class="font-label-caps text-label-caps text-surface-variant opacity-80 hover:text-secondary-fixed transition-colors uppercase" href="#">Contact</a>
+<a class="font-label-caps text-label-caps text-surface-variant opacity-80 hover:text-secondary-fixed transition-colors uppercase" href="#">Grievance Redressal</a>
+<a class="font-label-caps text-label-caps text-surface-variant opacity-80 hover:text-secondary-fixed transition-colors uppercase" href="#">Careers</a>
+</div>
+</div>
+<div class="border-t border-surface-variant pt-4 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-meta text-surface-variant">
+<p>© 2024 RAWINDIA NEWS PORTAL. Compliant with IT Rules 2021. All Rights Reserved.</p>
+</div>
+</footer>
+</body></html>
