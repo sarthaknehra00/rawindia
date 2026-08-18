@@ -103,10 +103,7 @@ const AppInner: React.FC = () => {
   const [pendingNewCount, setPendingNewCount] = useState<number>(0);
   const [pendingArticles, setPendingArticles] = useState<Article[]>([]);
 
-  // True when neither the local archive nor any live source produced anything —
-  // means what's on screen is fallback seed/demo content, not real news. Shown
-  // as an honest banner instead of silently passing off demo data as live.
-  const [liveFetchFailed, setLiveFetchFailed] = useState(false);
+
 
   const [historyProgress, setHistoryProgress] = useState<{ done: number; total: number } | null>(null);
 
@@ -186,10 +183,6 @@ const AppInner: React.FC = () => {
         const googleArts  = gnewsResult.status === 'fulfilled' ? gnewsResult.value        : [];
         const fresh = filterQualityArticles([...newsApiArts, ...googleArts]).map(stampArticleSections);
 
-        // Nothing cached locally AND nothing came back live — what's showing
-        // is fallback seed data, not real news. Say so.
-        setLiveFetchFailed(stored.length === 0 && fresh.length === 0);
-
         if (fresh.length > 0) {
           // Show raw articles IMMEDIATELY — no waiting for Groq
           await saveArticles(fresh);
@@ -229,7 +222,6 @@ const AppInner: React.FC = () => {
       } catch (err) {
         console.warn('Initial load error:', err);
         setDataReady(true);
-        setLiveFetchFailed(true);
       } finally {
         initialLiveLoadInFlight = false;
       }
@@ -263,7 +255,6 @@ const AppInner: React.FC = () => {
     cronScheduler.start();
 
     const unsubscribe = cronScheduler.subscribe((newArticles, isBackgroundCron) => {
-      if (newArticles.length > 0) setLiveFetchFailed(false);
       setArticles((prev) => {
         const existingIds = new Set(prev.map((a) => a.id));
         const newToAdd = newArticles.filter((a) => !existingIds.has(a.id));
@@ -358,16 +349,7 @@ const AppInner: React.FC = () => {
         onOpenStandards={() => setStandardsOpen(true)}
       />
 
-      {/* Honest "couldn't reach live sources" state — never silently pass off demo content as live */}
-      {liveFetchFailed && (
-        <div className="w-full bg-error-container border-b border-error">
-          <div className="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop py-1.5 flex items-center gap-2">
-            <span className="font-label-caps text-[10px] uppercase text-on-error-container">
-              ⚠ Couldn't reach live news sources — showing cached/demo dispatches. Retrying in the background.
-            </span>
-          </div>
-        </div>
-      )}
+
 
       {/* Historical archive loading progress */}
       {historyProgress && (
