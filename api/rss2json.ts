@@ -30,8 +30,11 @@ async function fetchWithKeyFallback(rssUrl: string): Promise<Response> {
   const keys = RSS2JSON_KEYS.length > 0 ? RSS2JSON_KEYS : [undefined];
   let lastError: unknown = null;
 
-  for (let i = 0; i < keys.length; i++) {
-    const isLastKey = i === keys.length - 1;
+  const startIndex = Math.floor(Math.random() * keys.length);
+
+  for (let attempt = 0; attempt < keys.length; attempt++) {
+    const i = (startIndex + attempt) % keys.length;
+    const isLastKey = attempt === keys.length - 1;
     // The no-key anonymous slot still gets its own cooldown tracking, keyed
     // by a fixed placeholder string rather than an actual credential.
     const cooldownKey = keys[i] ?? '__rss2json_anonymous__';
@@ -41,12 +44,19 @@ async function fetchWithKeyFallback(rssUrl: string): Promise<Response> {
       continue;
     }
 
-    const params = new URLSearchParams({ rss_url: rssUrl });
+    let cleanUrl = decodeURIComponent(rssUrl);
+    // Google News RSS expects '+' for spaces in the query.
+    // If we leave them as spaces, URLSearchParams encodes them to literal '+', which rss2json rejects.
+    // If we replace them with '+', URLSearchParams encodes them to '%2B', which rss2json accepts perfectly.
+    cleanUrl = cleanUrl.replace(/ /g, '+');
+    
+    const params = new URLSearchParams({ rss_url: cleanUrl });
     if (keys[i]) params.set('api_key', keys[i]!);
 
     try {
       const upstream = await fetch(`https://api.rss2json.com/v1/api.json?${params.toString()}`);
-      if (upstream.status === 429 || upstream.status === 401 || upstream.status === 403) {
+      if (upstream.status === 429 || upstream.status === 401 || upstream.status === 403 || upstream.status === 422 || upstream.status === 500) {
+        // Also fall back on 422 and 500 because some keys are out of feed quota (429) and others might be hitting weird feed limits
         recordKeyFailure(cooldownKey);
         if (!isLastKey) {
           console.warn(`[rss2json] key #${i + 1} failed with ${upstream.status} — falling back to next key`);
@@ -82,7 +92,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return;
   }
 
-  const rssUrl = req.query.rss_url;
+  let rssUrl = req.query.rss_url;
+  if (typeof rssUrl === 'string') {
+    try { rssUrl = decodeURIComponent(rssUrl); } catch { /* ignore */ }
+  }
   if (typeof rssUrl !== 'string' || !rssUrl.startsWith(ALLOWED_RSS_URL_PREFIX)) {
     res.status(400).json({ error: 'rss_url must be a Google News India RSS search URL' });
     return;
