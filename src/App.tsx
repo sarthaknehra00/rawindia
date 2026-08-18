@@ -94,6 +94,7 @@ const AppInner: React.FC = () => {
 
   // Scored and ranked articles pool
   const [articles, setArticles] = useState<Article[]>(() => rankArticles(INITIAL_ARTICLES, 'default'));
+
   // Flips true once the first real data pass (IndexedDB restore) settles —
   // used to tell "article not found because still loading" apart from
   // "article not found because it's a bad/expired link" (see ArticleRoute).
@@ -103,7 +104,10 @@ const AppInner: React.FC = () => {
   const [pendingNewCount, setPendingNewCount] = useState<number>(0);
   const [pendingArticles, setPendingArticles] = useState<Article[]>([]);
 
-
+  // True when neither the local archive nor any live source produced anything —
+  // means what's on screen is fallback seed/demo content, not real news. Shown
+  // as an honest banner instead of silently passing off demo data as live.
+  const [liveFetchFailed, setLiveFetchFailed] = useState(false);
 
   const [historyProgress, setHistoryProgress] = useState<{ done: number; total: number } | null>(null);
 
@@ -183,6 +187,10 @@ const AppInner: React.FC = () => {
         const googleArts  = gnewsResult.status === 'fulfilled' ? gnewsResult.value        : [];
         const fresh = filterQualityArticles([...newsApiArts, ...googleArts]).map(stampArticleSections);
 
+        // Nothing cached locally AND nothing came back live — what's showing
+        // is fallback seed data, not real news. Say so.
+        setLiveFetchFailed(stored.length === 0 && fresh.length === 0);
+
         if (fresh.length > 0) {
           // Show raw articles IMMEDIATELY — no waiting for Groq
           await saveArticles(fresh);
@@ -222,6 +230,7 @@ const AppInner: React.FC = () => {
       } catch (err) {
         console.warn('Initial load error:', err);
         setDataReady(true);
+        setLiveFetchFailed(true);
       } finally {
         initialLiveLoadInFlight = false;
       }
@@ -255,6 +264,7 @@ const AppInner: React.FC = () => {
     cronScheduler.start();
 
     const unsubscribe = cronScheduler.subscribe((newArticles, isBackgroundCron) => {
+      if (newArticles.length > 0) setLiveFetchFailed(false);
       setArticles((prev) => {
         const existingIds = new Set(prev.map((a) => a.id));
         const newToAdd = newArticles.filter((a) => !existingIds.has(a.id));
@@ -269,26 +279,25 @@ const AppInner: React.FC = () => {
           });
           return prev; // Don't inject yet — wait for user to click
         }
-
-        const combined = [...newToAdd, ...prev];
-        return rankArticles(combined, 'default');
+        return rankArticles([...newToAdd, ...prev], 'default');
       });
     });
 
     return () => {
-      unsubscribe();
+      initialLiveLoadInFlight = false;
       unsubQueue();
+      unsubscribe();
       cronScheduler.stop();
     };
   }, []);
 
+  // "Load new stories" button clicked
   const handleLoadNewStories = () => {
-    setArticles(prev => {
-      const combined = [...pendingArticles, ...prev];
-      return rankArticles(combined, 'default');
-    });
-    setPendingNewCount(0);
+    if (!pendingArticles.length) return;
+    const toInject = [...pendingArticles];
     setPendingArticles([]);
+    setPendingNewCount(0);
+    setArticles(prev => rankArticles([...toInject, ...prev], 'default'));
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -348,6 +357,17 @@ const AppInner: React.FC = () => {
         onOpenSearch={() => setSearchOpen(true)}
         onOpenStandards={() => setStandardsOpen(true)}
       />
+
+      {/* Honest "couldn't reach live sources" state — never silently pass off demo content as live */}
+      {liveFetchFailed && (
+        <div className="w-full bg-error-container border-b border-error">
+          <div className="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop py-1.5 flex items-center gap-2">
+            <span className="font-label-caps text-[10px] uppercase text-on-error-container">
+              ⚠ Couldn't reach live news sources — showing cached/demo dispatches. Retrying in the background.
+            </span>
+          </div>
+        </div>
+      )}
 
 
 
