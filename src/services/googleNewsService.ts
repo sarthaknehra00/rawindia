@@ -230,10 +230,14 @@ export async function fetchStateNews(stateName: string): Promise<Article[]> {
 // ── Public: fetch rotating set of India topic feeds ───────────────────────────
 export async function fetchGoogleNewsIndia(
   cycleIndex: number = 0,
-  topicsPerRun: number = 3
+  topicsPerRun: number = 4
 ): Promise<Article[]> {
   const total  = GNEWS_INDIA_TOPICS.length;
-  const start  = (cycleIndex * topicsPerRun) % total;
+  // Combine cycleIndex with the current time (e.g. 10-minute intervals) 
+  // so that if a user constantly hard-refreshes the page, they don't get stuck 
+  // checking the exact same first 4 topics forever.
+  const timeOffset = Math.floor(Date.now() / (10 * 60 * 1000)); 
+  const start  = ((cycleIndex + timeOffset) * topicsPerRun) % total;
   const topics = Array.from({ length: topicsPerRun }, (_, i) => GNEWS_INDIA_TOPICS[(start + i) % total]);
 
   const results = await Promise.allSettled(
