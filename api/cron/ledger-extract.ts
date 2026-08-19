@@ -80,6 +80,30 @@ async function fetchNewsApiItems(): Promise<RawItem[]> {
   }
 }
 
+async function fetchGoogleNewsItems(): Promise<RawItem[]> {
+  try {
+    // Fetch top 10 general India news to ensure we have political/national content
+    // even if NewsAPI is exhausted. Uses rss2json's public API directly (which has a separate 10,000/day limit)
+    // or our own proxy if we wanted, but we'll fetch from RSS directly if possible. Wait, we can just use rss2json.com directly here since it's server-side.
+    // Actually, let's just fetch the raw XML and parse it exactly like RBI to completely avoid the rss2json quota!
+    const res = await fetch('https://news.google.com/rss/search?q=india+politics+government&hl=en-IN&gl=IN&ceid=IN:en', {
+      headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)' },
+      signal: AbortSignal.timeout(8000),
+    });
+    if (!res.ok) return [];
+    const xml = await res.text();
+    const blocks = xml.match(/<item>[\s\S]*?<\/item>/g) || [];
+    return blocks.slice(0, 10).map(block => {
+      const title = (block.match(/<title><![CDATA[([\s\S]*?)]]><\/title>/) || block.match(/<title>([\s\S]*?)<\/title>/) || [])[1] || '';
+      const desc  = (block.match(/<description><![CDATA[([\s\S]*?)]]><\/description>/) || block.match(/<description>([\s\S]*?)<\/description>/) || [])[1] || '';
+      const link  = (block.match(/<link>([\s\S]*?)<\/link>/) || [])[1] || '';
+      return { title, snippet: desc.replace(/<[^>]+>/g, ' ').slice(0, 400), url: link };
+    }).filter(i => i.title && i.url);
+  } catch {
+    return [];
+  }
+}
+
 const SYSTEM_PROMPT = `You read a batch of real news dispatches and, for EACH ONE, look for exactly two things:
 1. A PROMISE: a named politician, party, ministry, or government body committing to a future, dated action. Only flag if a real, specific deadline (date/month/year) is stated.
 2. A VERDICT: a clear, concrete outcome that plainly helped one named party/institution and hurt another — not a routine announcement with no real winner or loser.
@@ -114,8 +138,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return;
   }
 
-  const [rbi, newsapi] = await Promise.all([fetchRbiItems(), fetchNewsApiItems()]);
-  const items = [...rbi, ...newsapi];
+  const [rbi, newsapi, gnews] = await Promise.all([fetchRbiItems(), fetchNewsApiItems(), fetchGoogleNewsItems()]);
+  const items = [...rbi, ...newsapi, ...gnews];
   if (items.length === 0) {
     await writeMeta(0, 0, 0);
     res.status(200).json({ ok: true, extracted: 0, note: 'no source items fetched today' });
