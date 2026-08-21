@@ -1,0 +1,14 @@
+[
+  {
+    "title": "Lok Sabha Question Hour - Session 8",
+    "sourceUrl": "https://sansad.in/api/loksabha/questions/pdf/12345",
+    "tier": "Tier-1 Government",
+    "publisher": "Sansad"
+  },
+  {
+    "title": "Latest updates from LiveMint",
+    "sourceUrl": "https://www.livemint.com/example-article",
+    "tier": "Tier-3 Commercial",
+    "publisher": "LiveMint"
+  }
+]
